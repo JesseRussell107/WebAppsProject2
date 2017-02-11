@@ -25,6 +25,7 @@ h1{
 	float:left;
 	width:80%;
 	height:70vh;
+        overflow:auto;
 }
 #UL{
 	width: 20%;
