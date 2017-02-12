@@ -21,7 +21,7 @@ body{
 }
 
 .dropbtn {
-    background-color: #4CAF50;
+    background-color: #7f006e;
     color: white;
     padding: 16px;
     font-size: 16px;
@@ -58,4 +58,18 @@ body{
 
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
+}
+
+a.proj:link, a.proj:visited{
+	background-color:#7f006e;
+	color:#c0c0c0;
+	padding:4px 25px;
+	text-align:center;
+	text-decoration:none;
+	display:inline-block;
+	font-size: 20px;
+}
+a.proj:hover, a.proj:active{
+	color:#7f006e;
+	background-color:#c0c0c0;
 }
