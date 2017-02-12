@@ -4,6 +4,7 @@ h1{
     position:relative;
     left:40px;
     color:white;
+    width: calc(100% - 40px);
 }
 body{
     background-color:#000000;
@@ -18,40 +19,22 @@ body{
     display:flex;
     justify-content:center;
 }
-a.proj:link, a.proj:visited{
-    background-color:#7f006e;
-    color:#c0c0c0;
-    padding:4px 25px;
-    text-align:center;
-    text-decoration:none;
-    display:inline-block;
-    font-size: 20px;
-}
-a.proj:hover, a.proj:active{
-    color:#7f006e;
-    background-color:#c0c0c0;
-}
-.projects{
-    position: relative;
-    display: inline-block;
-    float:left;
-    height:65vh;
-}
-a.different:link, a.different:visited{
-    color:white;
-}
-a.different:hover, a.different:active{
-    color:#7f006E;
-}
-.dropbtn{
-    background-color: #7f006e;
+
+.dropbtn {
+    background-color: #4CAF50;
     color: white;
     padding: 16px;
     font-size: 16px;
     border: none;
     cursor: pointer;
 }
-.dropContent {
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
@@ -59,17 +42,20 @@ a.different:hover, a.different:active{
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
+
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
+
 .dropdown-content a:hover {background-color: #f1f1f1}
+
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
 }
-
