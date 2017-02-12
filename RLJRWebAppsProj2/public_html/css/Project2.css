@@ -9,17 +9,12 @@ html {
     height: 100%;
 }
 
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
 /** Main Sections **/
 
 body {
     background-color:#D4EFDF;
     height: 100%;
+    font-family:impact;
 }
 
 #header{
@@ -42,27 +37,30 @@ body {
 }
 
 #upper{
-    background-color: white;
     height: calc(100% - 100px);
-    padding: 0.5%;
+    padding: 0 0.5%;
 }
 
 #below{
-    background-color: black;
     position: absolute;
     bottom: 0;
     width: 100%;
-    padding: 0.5%;
+    padding: 0 0.5%;
     height: 100px;
 }
 
+/** Sub-Sections **/
+
 #UL{
+    background-color: white;
     width: 20%;
     float: left;
     height: 100%;
+    overflow: auto;
 }
 
 #UR{
+    background-color: green;
     float: left;
     width: 80%;
     overflow: auto;
@@ -70,59 +68,79 @@ body {
 }
 
 #BL{
+    background-color: yellow;
     float:left;
     width:20%;
-    height:30%;
+    height: 100%;
 }
 
 #BR{
+    background-color: orange;
     float:left;
     width:80%;
-    height:30%;
+    height: 100%;
+    text-align: center;
 }
 
-div.year{
-    display:flex;
-    flex:1;
-    border:solid black;
-    font-family:impact;
-    font-size:40px;
-    color:white;
-    background-color:#063852;
-    text-align:center;
-    padding:2px 2px;
-    justify-content:center;
-    align-items:center;
+/** Course table **/
+
+.row{
+    height: 25%;
+    padding: 0.2%;
 }
-div.semester{
-    /*display:flex;
-    flex:1;
-    flex-direction:row;
-    */
+
+.semester{
     display: float;
     float: left;
     width: 32%;
     height: 100%;
     border:solid black;
     background-color:#b3de81;
-    padding:2px 2px;
-    justify-content:center;
-    align-items:center;
+    padding:5px;
     margin: 0 0.5%;
+    overflow: auto;
 }
-div.row{
-    /*-webkit-flex: 2;
-flex: 2;
-    display:flex;
-    flex:row;
-    flex-direction:row;
-    */
-    display: float;
-    float: left;
-    height: 25%;
-    width: 100%;
-    padding: 0.2%;
+
+.year{
+    height:2.0em;
+    line-height: 2.0em;
+    border:solid black;
+    font-family:impact;
+    font-size:1.2em;
+    color:white;
+    background-color:#063852;
+    text-align:center;
 }
+
+.course{
+    height:1.2em;
+    font-size:1.0em;
+    margin: 5px 0;
+}
+
+.name{
+    display:float;
+    float:left;
+    width:80%;
+    text-align: left;
+    padding: 0 10px;
+}
+
+.credits{
+    display:float;
+    float:left;
+    width:20%;
+    text-align: right;
+    padding: 0 10px;
+}
+
+/** Footer elements **/
+
+#BL p {
+    margin 5px;
+    text-align: center;
+}
+
 a:link, a:visited{
     background-color:#68a225;
     color:white;
@@ -133,8 +151,4 @@ a:link, a:visited{
 }
 a:hover, a:active{
     background-color:red;
-}
-p{
-    margin:2px;
-    padding:2px;
 }
