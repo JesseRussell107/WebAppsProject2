@@ -114,6 +114,7 @@ body {
     padding:5px;
     margin: 0 0.5%;
     overflow: auto;
+    border-radius: 10px;
 }
 
 .year{
@@ -123,6 +124,7 @@ body {
     color:white;
     background-color:#063852;
     text-align:center;
+    border-radius: 10px
 }
 
 .course{
