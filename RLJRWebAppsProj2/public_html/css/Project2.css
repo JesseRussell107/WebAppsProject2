@@ -104,6 +104,7 @@ body {
     padding: 0.2%;
 }
 
+
 .semester{
     display: float;
     float: left;
@@ -115,6 +116,10 @@ body {
     margin: 0 0.5%;
     overflow: auto;
     border-radius: 10px;
+}
+
+.old{
+    background-color:#87a783;
 }
 
 .year{

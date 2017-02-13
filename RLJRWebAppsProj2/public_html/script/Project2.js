@@ -78,7 +78,7 @@ function initialize() {
         new Course("Theology 2", "BTGE-3765", 3, "SP", 2018),
         new Course("Intro to Lit", "LIT-2300", 3, "SP", 2018)
     ];
-    planner = new Plan("My Plan", 2014, "Computer Science", "Jesse Richie", "SP", 2017, courses);
+    planner = new Plan("My Plan", 2014, "Computer Science", "Jesse Richie", "SU", 2016, courses);
     planner.years = {};
     for (i = 0; i < courses.length; i++) {
         var c = courses[i];
@@ -105,8 +105,12 @@ function initialize() {
     ur.innerHTML = "";
     var text = "";
     for (var year in planner.years) {
-        text += "<div class=\"row\">"
+        text += "<div class=\"row\">";
+
+        //FA
         if (year < planner.current_year) {
+            text += "<div class=\"semester old\">";
+        } else if (year == planner.current_year && planner.current_semester == "FA") {
             text += "<div class=\"semester old\">";
         } else {
             text += "<div class=\"semester\">";
@@ -123,7 +127,10 @@ function initialize() {
         }
         text += "<\/div>"; //semester div
 
-        if (year < planner.current_year && planner.current_semester !== "FA") {
+        //SP
+        if (year < (planner.current_year)) {
+            text += "<div class=\"semester old\">";
+        } else if (year == (planner.current_year - 1) && planner.current_semester == "SP") {
             text += "<div class=\"semester old\">";
         } else {
             text += "<div class=\"semester\">";
@@ -140,7 +147,10 @@ function initialize() {
         }
         text += "<\/div>"; //semester div
 
-        if (year < planner.current_year && planner.current_semester !== "SU") {
+        //SU
+        if (year < (planner.current_year-1)) {
+            text += "<div class=\"semester old\">";
+        } else if (year == (planner.current_year - 1) && (planner.current_semester == "SU" || planner.current_semester == "FA")) {
             text += "<div class=\"semester old\">";
         } else {
             text += "<div class=\"semester\">";
