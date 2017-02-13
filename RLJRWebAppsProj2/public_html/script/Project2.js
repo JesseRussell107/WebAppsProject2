@@ -21,12 +21,13 @@ function Year(name) {
     this.su = {};
 }
 
-function Plan(plan_name, catalog_year, major, student_name, current_semester, courses) {
+function Plan(plan_name, catalog_year, major, student_name, current_semester, current_year, courses) {
     this.plan_name = plan_name;
     this.catalog_year = catalog_year;
     this.major = major;
     this.student_name = student_name;
     this.current_semester = current_semester;
+    this.current_year = current_year;
     this.courses = courses;
 }
 
@@ -77,7 +78,7 @@ function initialize() {
         new Course("Theology 2", "BTGE-3765", 3, "SP", 2018),
         new Course("Intro to Lit", "LIT-2300", 3, "SP", 2018)
     ];
-    planner = new Plan("My Plan", 2014, "Computer Science", "Jesse Richie", "SP2017");
+    planner = new Plan("My Plan", 2014, "Computer Science", "Jesse Richie", "SP", 2017, courses);
     planner.years = {};
     for (i = 0; i < courses.length; i++) {
         var c = courses[i];
@@ -104,43 +105,58 @@ function initialize() {
     ur.innerHTML = "";
     var text = "";
     for (var year in planner.years) {
-         text = text +  "<div class=\"row\"> <div class=\"semester\">";
-         text = text +  "<div class=\"year\"><p>Fall " + planner.years[year].name.toString() + "<\/p><\/div>";
+        text += "<div class=\"row\">"
+        if (year < planner.current_year) {
+            text += "<div class=\"semester old\">";
+        } else {
+            text += "<div class=\"semester\">";
+        }
+        text += "<div class=\"year\"><p>Fall " + planner.years[year].name.toString() + "<\/p><\/div>";
         for (var cid in planner.years[year].fa) {
             var holder = planner.years[year].fa[cid];
-             text = text +  "<div class=\"course\"><div class=\"name\">";
-             text = text +  holder.ID + " - ";
-             text = text +  holder.name;
-             text = text +  "<\/div><div class=\"credits\">";
-             text = text +  holder.credits.toString();
-             text = text +  "<\/div><\/div>";
+            text += "<div class=\"course\"><div class=\"name\">";
+            text += holder.ID + " - ";
+            text += holder.name;
+            text += "<\/div><div class=\"credits\">";
+            text += holder.credits.toString();
+            text += "<\/div><\/div>";
         }
-         text = text +  "<\/div>"; //semester div
-         text = text +  "<div class=\"semester\">";
-         text = text +  "<div class=\"year\"><p>Spring " + planner.years[year].name.toString() + "</p><\/div>";
+        text += "<\/div>"; //semester div
+
+        if (year < planner.current_year && planner.current_semester !== "FA") {
+            text += "<div class=\"semester old\">";
+        } else {
+            text += "<div class=\"semester\">";
+        }
+        text += "<div class=\"year\"><p>Spring " + (planner.years[year].name + 1).toString() + "</p><\/div>";
         for (var cid in planner.years[year].sp) {
             var holder = planner.years[year].sp[cid];
-             text = text +  "<div class=\"course\"><div class=\"name\">";
-             text = text +  holder.ID + " - ";
-             text = text +  holder.name;
-             text = text +  "<\/div><div class=\"credits\">";
-             text = text +  holder.credits.toString();
-             text = text +  "<\/div><\/div>";
+            text += "<div class=\"course\"><div class=\"name\">";
+            text += holder.ID + " - ";
+            text += holder.name;
+            text += "<\/div><div class=\"credits\">";
+            text += holder.credits.toString();
+            text += "<\/div><\/div>";
         }
-         text = text +  "<\/div>"; //semester div
-         text = text +  "<div class=\"semester\">";
-         text = text +  "<div class=\"year\"><p>Summer " + planner.years[year].name.toString() + "</p><\/div>";
+        text += "<\/div>"; //semester div
+
+        if (year < planner.current_year && planner.current_semester !== "SU") {
+            text += "<div class=\"semester old\">";
+        } else {
+            text += "<div class=\"semester\">";
+        }
+        text += "<div class=\"year\"><p>Summer " + (planner.years[year].name + 1).toString() + "</p><\/div>";
         for (var cid in planner.years[year].su) {
             var holder = planner.years[year].su[cid];
-             text = text +  "<div class=\"course\"><div class=\"name\">";
-             text = text +  holder.ID + " - ";
-             text = text +  holder.name;
-             text = text +  "<\/div><div class=\"credits\">";
-             text = text +  holder.credits.toString();
-             text = text +  "<\/div><\/div>";
+            text += "<div class=\"course\"><div class=\"name\">";
+            text += holder.ID + " - ";
+            text += holder.name;
+            text += "<\/div><div class=\"credits\">";
+            text += holder.credits.toString();
+            text += "<\/div><\/div>";
         }
-         text = text +  "<\/div>"; //semester div
-         text = text +  "<\/div>"; //row div
+        text += "<\/div>"; //semester div
+        text += "<\/div>"; //row div
     }
     ur.innerHTML = text;
 //    for (var year in planner.years) {
