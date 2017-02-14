@@ -53,12 +53,12 @@
             </div>
             <div id="below">
                 <div id="BL">
-                    <form name="phonecipher" onsubmit="return validateForm()">
+                    <form name="phonecipher" onsubmit="validateForm()">
                         <div>
                             <p>Telephone #:</p>
-                            <input id="tele" name="tele" type="text" placeholder="555-555-5555">
+                            <input id="tele" name="tele" type="text" placeholder="555-555-5555" autocomplete="off" onchange="return validateTele()">
                             <p>Cipher:</p>
-                            <input id="cipher" name="cipher" type="text" placeholder="AXU">
+                            <input id="cipher" name="cipher" type="text" placeholder="AXU" autocomplete="off" onchange="return validateCipher()">
                         </div>
                         <div>
                             <input type="submit" value="Submit">

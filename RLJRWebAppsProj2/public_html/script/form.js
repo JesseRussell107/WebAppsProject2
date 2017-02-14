@@ -1,37 +1,50 @@
-function validateForm() {
-    var success = true;
-    var teletext = "";
-    var ciphtext = "";
+function validateTele() {
+    var text;
     var tele = document.phonecipher.tele.value;
-    var cipher = document.phonecipher.cipher.value;
     if(tele === ""){
-        teletext = "Please enter a tele #<br/>";
-        document.getElementById("tele").className += " badinput";
-        success = false;
-    }
-    if(cipher === ""){
-        ciphtext = "Please enter a cipher";
-        document.getElementById("cipher").className += " badinput";
-        success = false;
+        text = "Please enter a tele #<br/>";
+        document.getElementById("tele").className = "badinput";
+        return text;
     }
     var pos = tele.search(/^((((\d\-)?(\d{3}\-?))|(\((\d\-)?\d{3})\))?\d{3}\-?\d{4})$/);
     if (pos !== 0) {
-        teletext = "Bad tele #: ex. 555-555-5555<br/>";
-        document.getElementById("tele").className += " badinput";
-        success = false;
+        text = "Bad tele #: ex. 555-555-5555<br/>";
+        document.getElementById("tele").className = "badinput";
+        return text;
     }
-    var pos = tele.search(/^(\d*[^a-zA-Z]*|[a-zA-Z]*\D*)$/);
-    if (pos !== 0) {
-        ciphtext = "Bad cipher: either all alpha or all num";
-        document.getElementById("cipher").className += " badinput";
-        success = false;
-    }
+    text = "success";
+    document.getElementById("tele").className = "goodinput";
+    return text;
+}
+
+function validateCipher() {
     var text;
-    if (success === true) {
-        text = "Thank you!";
+    var ciph = document.phonecipher.cipher.value;
+    if(ciph === ""){
+        text = "Please enter some text<br/>";
+        document.getElementById("cipher").className = "badinput";
+        return text;
     }
-    else {
-        var text = teletext + ciphtext;
+    var pos = ciph.search(/^([a-zA-Z]*\D*)$/);
+    if (pos !== 0) {
+        text = "Bad cipher: only letters are allowed<br/>";
+        document.getElementById("cipher").className = "badinput";
+        return text;
+    }
+    text = "success";
+    document.getElementById("cipher").className = "goodinput";
+    return text;
+}
+
+function validateForm() {
+    var tele = validateTele();
+    var ciph = validateCipher();
+    var text="";
+    if (tele!=="success"){
+        text+=tele+"<br/>";
+    }
+    if (ciph!=="success"){
+        text+=ciph;
     }
     document.getElementById("response").innerHTML = text;
 }

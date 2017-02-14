@@ -193,6 +193,10 @@ input[type=text].badinput {
     border-color: red;
 }
 
+input[type=text].goodinput {
+    border-color: green;
+}
+
 input[type=submit] {
     width: 75%;
     position: relative;
