@@ -1,3 +1,11 @@
+/**
+ * Validates form fields for onchoose and onsubmit events
+ */
+
+/**
+ * Validates a telephone #
+ * @returns {String}
+ */
 function validateTele() {
     var text;
     var tele = document.phonecipher.tele.value;
@@ -16,7 +24,10 @@ function validateTele() {
     document.getElementById("tele").className = "goodinput";
     return text;
 }
-
+/**
+ * Validates a cipher (i.e. alphabetic string)
+ * @returns {String}
+ */
 function validateCipher() {
     var text;
     var ciph = document.phonecipher.cipher.value;
@@ -35,7 +46,10 @@ function validateCipher() {
     document.getElementById("cipher").className = "goodinput";
     return text;
 }
-
+/**
+ * Validates the entire form and informs user on bad input
+ * @returns {Boolean}
+ */
 function validateForm() {
     var tele = validateTele();
     var ciph = validateCipher();
