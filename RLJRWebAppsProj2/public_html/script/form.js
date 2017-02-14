@@ -40,11 +40,16 @@ function validateForm() {
     var tele = validateTele();
     var ciph = validateCipher();
     var text="";
+    var teleV = true;
+    var ciphV = true;
     if (tele!=="success"){
-        text+=tele+"<br/>";
+        text+=tele;
+        teleV = false;
     }
     if (ciph!=="success"){
         text+=ciph;
+        ciphV = false;
     }
     document.getElementById("response").innerHTML = text;
+    return teleV&&ciphV;
 }

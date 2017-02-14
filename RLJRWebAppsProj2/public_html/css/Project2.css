@@ -171,11 +171,16 @@ body {
     font-size: 0.8em;
 }
 
+#BL #response {
+    font-size: 0.7em;
+}
+
 #BL div {
     float: left;
     width: 50%;
     height: 100%;
     padding: 2px;
+    overflow: auto;
 }
 
 input[type=text] {
