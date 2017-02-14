@@ -61,7 +61,7 @@ body {
 }
 
 #below{
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     padding: 0 0.5%;
@@ -162,9 +162,30 @@ body {
 
 /** Footer elements **/
 
+#BL form {
+    height: 100%;
+    width: 100%;
+}
+
 #BL p {
-    margin:5px;
-    text-align: center;
+    font-size: 0.8em;
+}
+
+#BL div {
+    float: left;
+    width: 50%;
+    height: 100%;
+    padding: 2px;
+}
+
+#BL .text {
+    width: 100%;
+}
+
+#submit {
+    width: 75%;
+    position: relative;
+    left: 25%;
 }
 
 /** Dropdown Menu **/
