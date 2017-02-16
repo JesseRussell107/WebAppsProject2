@@ -78,7 +78,7 @@ function initialize() {
         new Course("Theology 2", "BTGE-3765", 3, "SP", 2018),
         new Course("Intro to Lit", "LIT-2300", 3, "SP", 2018)
     ];
-    planner = new Plan("My Plan", 2014, "Computer Science", "Jesse Richie", "SU", 2016, courses);
+    planner = new Plan("My Plan", 2014, "Computer Science", "Jesse Richie", "SP", 2017, courses);
     planner.years = {};
     for (i = 0; i < courses.length; i++) {
         var c = courses[i];
