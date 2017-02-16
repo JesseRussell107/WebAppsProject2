@@ -148,7 +148,7 @@ function initialize() {
         text += "<\/div>"; //semester div
 
         //SU
-        if (year < (planner.current_year-1)) {
+        if (year < (planner.current_year - 1)) {
             text += "<div class=\"semester old\">";
         } else if (year == (planner.current_year - 1) && (planner.current_semester == "SU" || planner.current_semester == "FA")) {
             text += "<div class=\"semester old\">";
@@ -169,75 +169,5 @@ function initialize() {
         text += "<\/div>"; //row div
     }
     ur.innerHTML = text;
-//    for (var year in planner.years) {
-//        var row = document.createElement("div");
-//        row.setAttribute("class", "row");
-//        //FA
-//        var fa = document.createElement("div");
-//        fa.setAttribute("class", "semester");
-//        var y = document.createElement("div");
-//        y.setAttribute("class", "year");
-//        var ytxt = document.createTextNode("Fall " + planner.years[year].name.toString());
-//        y.appendChild(ytxt);
-//        fa.appendChild(y);
-//        for (var cid in planner.years[year].fa) {
-//            var cou = document.createElement("div");
-//            cou.setAttribute("class", "name");
-//            var c = planner.years[year].fa[cid];
-//            cou.appendChild(document.createTextNode(c.ID + "-" + c.name));
-//
-//            var cred = document.createElement("div");
-//            cred.setAttribute("class", "credits");
-//            cred.appendChild(document.createTextNode(c.credits.toString()));
-//
-//            fa.appendChild(cou);
-//            fa.appendChild(cred);
-//        }
-//        //SP
-//        var sp = document.createElement("div");
-//        sp.setAttribute("class", "semester");
-//        var y = document.createElement("div");
-//        y.setAttribute("class", "year");
-//        var ytxt = document.createTextNode("Spring " + (planner.years[year].name + 1).toString());
-//        y.appendChild(ytxt);
-//        sp.appendChild(y);
-//        for (var cid in planner.years[year].sp) {
-//            var cou = document.createElement("div");
-//            cou.setAttribute("class", "name");
-//            var c = planner.years[year].sp[cid];
-//            cou.appendChild(document.createTextNode(c.ID + "-" + c.name));
-//
-//            var cred = document.createElement("div");
-//            cred.setAttribute("class", "credits");
-//            cred.appendChild(document.createTextNode(c.credits.toString()));
-//
-//            sp.appendChild(cou);
-//            sp.appendChild(cred);
-//        }
-//        //SU
-//        var su = document.createElement("div");
-//        su.setAttribute("class", "semester");
-//        var y = document.createElement("div");
-//        y.setAttribute("class", "year");
-//        var ytxt = document.createTextNode("Fall " + planner.years[year].name.toString());
-//        y.appendChild(ytxt);
-//        su.appendChild(y);
-//        for (var cid in planner.years[year].su) {
-//            var cou = document.createElement("div");
-//            cou.setAttribute("class", "name");
-//            var c = planner.years[year].su[cid];
-//            cou.appendChild(document.createTextNode(c.ID + "-" + c.name));
-//
-//            var cred = document.createElement("div");
-//            cred.setAttribute("class", "credits");
-//            cred.appendChild(document.createTextNode(c.credits.toString()));
-//
-//            su.appendChild(cou);
-//            su.appendChild(cred);
-//        }
-//    }
-//    document.getElementById("UR");
 }
-
 ;
-//initialize();
