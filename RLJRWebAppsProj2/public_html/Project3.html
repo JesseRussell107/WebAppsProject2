@@ -7,19 +7,36 @@
         <meta name="description" content="Landing page for CS3220 project"/>
         <meta name="author" content="Jesse Russell and Rich Lively"/>
 
+        <!-- CSS Sylesheets -->
         <link rel="icon" href="img/api.png"/>
         <link rel="stylesheet" href="css/Project3.css" type="text/css"/>
-
-        <script type="text/javascript" src ="script/Project3.js"></script>
-        <script type="text/javascript" src ="script/form.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="/resources/demos/style.css">
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
+
+        <!-- JQuery -->
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <!-- JQuery Plugins -->
+        <script type="text/javascript" charset="utf-8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+
+        <!-- Personal JS -->
+        <script type="text/javascript" src ="script/Project3.js"></script>
+        <script type="text/javascript" src ="script/form.js"></script>
+
         <script>
             $(function () {
                 $("#accordion").accordion();
             });
+        </script>
+        <script>
+            $(document).ready( function () {
+                $("#search-table").DataTable( {
+                    ajax: ''
+                });
+            });
+            $('#search-table').DataTable()
         </script>
     </head>
     <body onload="initialize()">
@@ -86,7 +103,30 @@
                         </div>
                     </form>
                 </div>
-                <div id="BR">Empty</div>
+                <div id="BR">
+                    <table id="search-table" class="display">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Prase</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Jesse</td>
+                                <td>Dangit Richie!</td>
+                            </tr>
+                            <tr>
+                                <td>Richie</td>
+                                <td>Wowzers!</td>
+                            </tr>
+                            <tr>
+                                <td>Gallagher</td>
+                                <td>Compiler is cool</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </body>
