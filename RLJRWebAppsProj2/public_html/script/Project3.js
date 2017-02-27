@@ -30,6 +30,7 @@ function Plan(plan_name, catalog_year, major, student_name, current_semester, cu
     this.courses = courses;
 }
 
+function 
 
 function initializeUR() {
 

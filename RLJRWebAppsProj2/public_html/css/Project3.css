@@ -92,6 +92,7 @@ body {
     float:left;
     width:20%;
     height: 100%;
+    overflow: auto;
 }
 
 #BR{
@@ -99,6 +100,7 @@ body {
     width:80%;
     height: 100%;
     text-align: center;
+    overflow: auto;
 }
 
 /** Course table **/

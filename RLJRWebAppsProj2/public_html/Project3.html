@@ -34,9 +34,20 @@
             $(document).ready(initializeUR());
         </script>
         <script>
-            $(document).ready( function () {
-                $("#search-table").DataTable( {
-                    ajax: ''
+            $(document).ready(function () {
+                $("#search-table").DataTable({
+                    ajax: {
+                        url: '/~gallaghd/cs3220/termProject/getCourseList.php',
+                        dataSrc: ''
+                    },
+                    columns: [
+                        {data: 'name'},
+                        {data: 'number'},
+                        {data: 'description'},
+                        {data: 'credits'}
+
+
+                    ]
                 });
             });
             $('#search-table').DataTable()
@@ -150,12 +161,12 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Number</th>
-                                <th>Credits</th>
                                 <th>Description</th>
+                                <th>Credits</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                         </tbody>
                     </table>
                 </div>
