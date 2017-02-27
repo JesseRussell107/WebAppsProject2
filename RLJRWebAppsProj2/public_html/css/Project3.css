@@ -259,7 +259,6 @@ input[type=submit] {
 .dropdown:hover .dropbtn {
     background-color: #68A225;
 }
-
 #accordion .ui-accordion-header{
     background-color: #68A225;
     font-family: "Lucida Sans Unicode";
