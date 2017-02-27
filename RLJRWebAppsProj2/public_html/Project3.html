@@ -9,20 +9,20 @@
 
         <link rel="icon" href="img/api.png"/>
         <link rel="stylesheet" href="css/Project3.css" type="text/css"/>
-
         <script type="text/javascript" src ="script/Project3.js"></script>
         <script type="text/javascript" src ="script/form.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="/resources/demos/style.css">
+        
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script>
             $(function () {
                 $("#accordion").accordion();
             });
+            $(document).ready(initialize);
         </script>
     </head>
-    <body onload="initialize()">
+    <body>
         <!--TODO: make the header dynamic-->
         <div id="header">
             <div class="dropdown">
@@ -34,8 +34,8 @@
             </div>
             <div class="column">
                 <p>
-                    <span id="plan-name">Jesse Richie</span><br/>
-                    <span id="plan-term">2014</span>
+                    <span id="plan-name"></span><br/>
+                    <span id="plan-term"></span>
                 </p>
                 <p class="heading">
                     Student:<br/>
@@ -44,12 +44,12 @@
             </div>
             <div class="column">
                 <p>
-                    <span id="plan-majors">Computer Science</span><br/>
-                    <span id="plan-minors">Bible</span>
+                    <span id="plan-majors"></span><br/>
+                    <span id="plan-IDname"></span>
                 </p>
                 <p class="heading">
                     Major:<br/>
-                    Minor:
+                    Plan:
                 </p>
             </div>
             <h1 id="title"><img src="img/Ape.png" alt="Whoops...." style="width:112px;height:46px;"></h1>
@@ -59,7 +59,7 @@
                 <div id="UL">
                     <div id="accordion">
                         <h3>Gen Eds</h3>
-                        <div>Content</div>
+                        <div><p>Content</p><p>Content</p><p>Content</p></div>
                         <h3>Major Specific</h3>
                         <div>Content</div>
                         <h3>Track</h3>
@@ -86,7 +86,9 @@
                         </div>
                     </form>
                 </div>
-                <div id="BR">Empty</div>
+                <div id="BR">
+                    <div></div>
+                </div>
             </div>
         </div>
     </body>
