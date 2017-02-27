@@ -59,7 +59,7 @@ body {
 }
 
 #upper{
-    height: calc(100% - 100px);
+    height: calc(100% - 200px);
     padding: 0 0.5%;
 }
 
@@ -68,7 +68,7 @@ body {
     bottom: 0;
     width: 100%;
     padding: 0 0.5%;
-    height: 100px;
+    height: 200px;
     background-color:#0003;
 }
 
