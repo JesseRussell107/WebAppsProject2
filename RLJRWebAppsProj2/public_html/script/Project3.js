@@ -31,16 +31,13 @@ function Plan(plan_name, catalog_year, major, student_name, current_semester, cu
 }
 
 
-function initialize() {
-    //accordion fixing
-    
+function initializeUR() {
 
-    
     $.getJSON("/~gallaghd/cs3220/termProject/getPlan.php", function (data) {
-var catYear;
-    var courseList = [];
-    var planner = new Plan("Error", 2014, "Error", "Error", "SP", 2017, courseList);
-    
+        var catYear;
+        var courseList = [];
+        var planner = new Plan("Error", 2014, "Error", "Error", "SP", 2017, courseList);
+
         $("#plan-name").append(data.student);
         catYear = data.catalogYear;
         $("#plan-term").append(catYear);
@@ -68,25 +65,25 @@ var catYear;
 
             var c = new Course(element.name, element.number, element.credits, smester, element.year);
             courseList.push(c);
-var breaker = courseList[0];
-breaker = courseList[1];
-breaker = courseList[2];
-breaker = courseList[3];
-breaker = courseList[4];
-breaker = courseList[5];
-breaker = courseList[6];
-breaker = courseList[7];
-breaker = courseList[8];
-breaker = courseList[9];
-breaker = courseList[10];
+            var breaker = courseList[0];
+            breaker = courseList[1];
+            breaker = courseList[2];
+            breaker = courseList[3];
+            breaker = courseList[4];
+            breaker = courseList[5];
+            breaker = courseList[6];
+            breaker = courseList[7];
+            breaker = courseList[8];
+            breaker = courseList[9];
+            breaker = courseList[10];
 
         });
 
 
-        
+
         planner = new Plan(data.planName, data.catalogYear, data.major, data.student, season, data.currYear, courseList);
 
-    
+
 
 //    var courses = [
 //        new Course("C++ Programming", "CS-1210", 2, "FA", 2014),
@@ -134,96 +131,96 @@ breaker = courseList[10];
 //        new Course("Intro to Lit", "LIT-2300", 3, "SP", 2018)
 //    ];
 
-	planner.years = [];
-    for (i = 0; i < courseList.length; i++) {
-        var c = courseList[i];
-        if (c.semester === "FA" && !(c.year.toString() in planner.years)) {
-            planner.years[c.year.toString()] = new Year(c.year);
-        } else if ((c.semester === "SP" || c.semester === "SU") &&
-                !(((c.year - 1).toString()) in planner.years)) {
-            planner.years[(c.year - 1).toString()] = new Year(c.year - 1);
-        }
+        planner.years = [];
+        for (i = 0; i < courseList.length; i++) {
+            var c = courseList[i];
+            if (c.semester === "FA" && !(c.year.toString() in planner.years)) {
+                planner.years[c.year.toString()] = new Year(c.year);
+            } else if ((c.semester === "SP" || c.semester === "SU") &&
+                    !(((c.year - 1).toString()) in planner.years)) {
+                planner.years[(c.year - 1).toString()] = new Year(c.year - 1);
+            }
 
-        var s = c.semester;
-        var iden = c.ID;
-        if (s === "FA") {
-            planner.years[c.year.toString()].fa[iden] = courseList[i];
-        } else if (s === "SP") {
-            var yr = c.year - 1;
-            planner.years[yr.toString()].sp[iden] = courseList[i];
-        } else /* SU */ {
-            var yr = c.year - 1;
-            planner.years[yr.toString()].su[iden] = courseList[i];
+            var s = c.semester;
+            var iden = c.ID;
+            if (s === "FA") {
+                planner.years[c.year.toString()].fa[iden] = courseList[i];
+            } else if (s === "SP") {
+                var yr = c.year - 1;
+                planner.years[yr.toString()].sp[iden] = courseList[i];
+            } else /* SU */ {
+                var yr = c.year - 1;
+                planner.years[yr.toString()].su[iden] = courseList[i];
+            }
         }
-    }
-    var ur = document.getElementById("UR");
-    ur.innerHTML = "";
-    var text = "";
-    for (var year in planner.years) {
-        text += "<div class=\"row\">";
+        var ur = document.getElementById("UR");
+        ur.innerHTML = "";
+        var text = "";
+        for (var year in planner.years) {
+            text += "<div class=\"row\">";
 
-        //FA
-        if (year < planner.current_year) {
-            text += "<div class=\"semester old\">";
-        } else if (year == planner.current_year && planner.current_semester == "FA") {
-            text += "<div class=\"semester old\">";
-        } else {
-            text += "<div class=\"semester\">";
-        }
-        text += "<div class=\"year\"><p>Fall " + planner.years[year].name.toString() + "<\/p><\/div>";
-        for (var cid in planner.years[year].fa) {
-            var holder = planner.years[year].fa[cid];
-            text += "<div class=\"course\"><div class=\"name\">";
-            text += holder.ID + " - ";
-            text += holder.name;
-            text += "<\/div><div class=\"credits\">";
-            text += holder.credits.toString();
-            text += "<\/div><\/div>";
-        }
-        text += "<\/div>"; //semester div
+            //FA
+            if (year < planner.current_year) {
+                text += "<div class=\"semester old\">";
+            } else if (year == planner.current_year && planner.current_semester == "FA") {
+                text += "<div class=\"semester old\">";
+            } else {
+                text += "<div class=\"semester\">";
+            }
+            text += "<div class=\"year\"><p>Fall " + planner.years[year].name.toString() + "<\/p><\/div>";
+            for (var cid in planner.years[year].fa) {
+                var holder = planner.years[year].fa[cid];
+                text += "<div class=\"course\"><div class=\"name\">";
+                text += holder.ID + " - ";
+                text += holder.name;
+                text += "<\/div><div class=\"credits\">";
+                text += holder.credits.toString();
+                text += "<\/div><\/div>";
+            }
+            text += "<\/div>"; //semester div
 
-        //SP
-        if (year < (planner.current_year)) {
-            text += "<div class=\"semester old\">";
-        } else if (year == (planner.current_year - 1) && planner.current_semester == "SP") {
-            text += "<div class=\"semester old\">";
-        } else {
-            text += "<div class=\"semester\">";
-        }
-        text += "<div class=\"year\"><p>Spring " + (planner.years[year].name + 1).toString() + "</p><\/div>";
-        for (var cid in planner.years[year].sp) {
-            var holder = planner.years[year].sp[cid];
-            text += "<div class=\"course\"><div class=\"name\">";
-            text += holder.ID + " - ";
-            text += holder.name;
-            text += "<\/div><div class=\"credits\">";
-            text += holder.credits.toString();
-            text += "<\/div><\/div>";
-        }
-        text += "<\/div>"; //semester div
+            //SP
+            if (year < (planner.current_year)) {
+                text += "<div class=\"semester old\">";
+            } else if (year == (planner.current_year - 1) && planner.current_semester == "SP") {
+                text += "<div class=\"semester old\">";
+            } else {
+                text += "<div class=\"semester\">";
+            }
+            text += "<div class=\"year\"><p>Spring " + (planner.years[year].name + 1).toString() + "</p><\/div>";
+            for (var cid in planner.years[year].sp) {
+                var holder = planner.years[year].sp[cid];
+                text += "<div class=\"course\"><div class=\"name\">";
+                text += holder.ID + " - ";
+                text += holder.name;
+                text += "<\/div><div class=\"credits\">";
+                text += holder.credits.toString();
+                text += "<\/div><\/div>";
+            }
+            text += "<\/div>"; //semester div
 
-        //SU
-        if (year < (planner.current_year - 1)) {
-            text += "<div class=\"semester old\">";
-        } else if (year == (planner.current_year - 1) && (planner.current_semester == "SU" || planner.current_semester == "FA")) {
-            text += "<div class=\"semester old\">";
-        } else {
-            text += "<div class=\"semester\">";
+            //SU
+            if (year < (planner.current_year - 1)) {
+                text += "<div class=\"semester old\">";
+            } else if (year == (planner.current_year - 1) && (planner.current_semester == "SU" || planner.current_semester == "FA")) {
+                text += "<div class=\"semester old\">";
+            } else {
+                text += "<div class=\"semester\">";
+            }
+            text += "<div class=\"year\"><p>Summer " + (planner.years[year].name + 1).toString() + "</p><\/div>";
+            for (var cid in planner.years[year].su) {
+                var holder = planner.years[year].su[cid];
+                text += "<div class=\"course\"><div class=\"name\">";
+                text += holder.ID + " - ";
+                text += holder.name;
+                text += "<\/div><div class=\"credits\">";
+                text += holder.credits.toString();
+                text += "<\/div><\/div>";
+            }
+            text += "<\/div>"; //semester div
+            text += "<\/div>"; //row div
         }
-        text += "<div class=\"year\"><p>Summer " + (planner.years[year].name + 1).toString() + "</p><\/div>";
-        for (var cid in planner.years[year].su) {
-            var holder = planner.years[year].su[cid];
-            text += "<div class=\"course\"><div class=\"name\">";
-            text += holder.ID + " - ";
-            text += holder.name;
-            text += "<\/div><div class=\"credits\">";
-            text += holder.credits.toString();
-            text += "<\/div><\/div>";
-        }
-        text += "<\/div>"; //semester div
-        text += "<\/div>"; //row div
-    }
-    ur.innerHTML = text;
-});
+        ur.innerHTML = text;
+    });
 }
 ;
