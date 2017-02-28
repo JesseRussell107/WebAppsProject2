@@ -30,8 +30,37 @@ function Plan(plan_name, catalog_year, major, student_name, current_semester, cu
     this.courses = courses;
 }
 
-function initializeUR() {
+function getYear() {
+    $.getJSON("/~gallaghd/ymm/ymmdb.php?fmt=json", function (data) {
+        $.each(data, function (element, data) {
+            $("#yearSelect").append("<option value=\"" + data + "\">" + data + "</option>");
+        });
+    });
+}
 
+function getMake() {
+    var holder = document.getElementById("#yearSelect");
+    var year = holder.value;
+    $.getJSON("/~gallaghd/ymm/ymmdb.php?fmt=json&year=" + year, function (data) {
+        $.each(data, function (element, data) {
+            $("#makeSelect").append("<option value=\"" + data + "\">" + data + "</option>");
+        });
+    });
+}
+
+function getModel() {
+    var holder = document.getElementById("#yearSelect");
+    var year = holder.value;
+    holder = document.getElementById("#makeSelect");
+    var make = holder.value;
+    $.getJSON("/~gallaghd/ymm/ymmdb.php?fmt=json&year=" + year + "&make=" + make, function (data) {
+        $.each(data, function (element, data) {
+            $("#makeSelect").append("<option value=\"" + data + "\">" + data + "</option>");
+        });
+    });
+}
+
+function initializeUR() {
     $.getJSON("/~gallaghd/cs3220/termProject/getPlan.php", function (data) {
         var catYear;
         var courseList = [];

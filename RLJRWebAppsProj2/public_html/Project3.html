@@ -32,6 +32,7 @@
                 $("#accordion").accordion({heightStyle: "content"});
             });
             $(document).ready(initializeUR());
+            $(document).ready(getYear());
         </script>
         <script>
             $(document).ready(function () {
@@ -142,18 +143,9 @@
             </div>
             <div id="below">
                 <div id="BL">
-                    <form action="http://judah:8080/servlet/RequestInfoExample" name="phonecipher" onsubmit="return validateForm()">
-                        <div>
-                            <p>Telephone #:</p>
-                            <input id="tele" name="tele" type="text" placeholder="555-555-5555" autocomplete="off" onchange="return validateTele()">
-                            <p>Cipher:</p>
-                            <input id="cipher" name="cipher" type="text" placeholder="AXU" autocomplete="off" onchange="return validateCipher()">
-                        </div>
-                        <div>
-                            <input type="submit" value="Submit">
-                            <p id="response"></p>
-                        </div>
-                    </form>
+                    <select id="yearSelect"></select>
+                    <select id="makeSelect"></select>
+                    <select id="modelSelect"></select>
                 </div>
                 <div id="BR">
                     <table id="search-table" class="display">
