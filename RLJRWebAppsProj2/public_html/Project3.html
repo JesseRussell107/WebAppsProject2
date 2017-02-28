@@ -6,14 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta name="description" content="Landing page for CS3220 project"/>
         <meta name="author" content="Jesse Russell and Rich Lively"/>
+        <link rel="icon" href="img/api.png"/>
 
         <!-- CSS Sylesheets -->
-        <link rel="icon" href="img/api.png"/>
-        <link rel="stylesheet" href="css/Project3.css" type="text/css"/>
-        <script type="text/javascript" src ="script/Project3.js"></script>
-        <script type="text/javascript" src ="script/form.js"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
+        <link rel="stylesheet" href="css/Project3.css" type="text/css"/>
 
         <!-- JQuery -->
 
@@ -36,6 +34,9 @@
         <script>
             $(document).ready(function () {
                 $("#search-table").DataTable({
+                    scrollY : '80px',
+                    scrollCollapse: true,
+                    paging:         false,
                     ajax: {
                         url: '/~gallaghd/cs3220/termProject/getCourseList.php',
                         dataSrc: ''

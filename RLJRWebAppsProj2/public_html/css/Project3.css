@@ -60,14 +60,14 @@ body {
 
 #upper{
     height: calc(100% - 200px);
-    padding: 0 0.5%;
+    padding: 0 0 0 0.5%;
 }
 
 #below{
     position: fixed;
     bottom: 0;
     width: 100%;
-    padding: 0 0.5%;
+    padding: 0 0 0 0.5%;
     height: 200px;
     background-color:#0003;
 }
@@ -99,8 +99,6 @@ body {
     float:left;
     width:80%;
     height: 100%;
-    text-align: center;
-    overflow: auto;
 }
 
 /** Course table **/
@@ -211,6 +209,14 @@ input[type=submit] {
     width: 75%;
     position: relative;
     left: 25%;
+}
+
+#search-table {
+    width: 100%;
+}
+
+th, td {
+    white-space: nowrap;
 }
 
 /** Dropdown Menu **/
