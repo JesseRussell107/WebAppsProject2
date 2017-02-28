@@ -30,8 +30,40 @@ function Plan(plan_name, catalog_year, major, student_name, current_semester, cu
     this.courses = courses;
 }
 
-function initializeUR() {
+function getYear() {
+    $.getJSON("/~gallaghd/ymm/ymmdb.php?fmt=json", function (data) {
+        $.each(data, function (index, element) {
+            $("#yearSelect").append("<option value=\"" + element + "\">" + element + "</option>");
+        });
+    });
+}
 
+function getMake() {
+    var holder = document.getElementById("yearSelect");
+    var year = holder.value;
+    $("#makeSelect").html("");
+    $("#modelSelect").html("");
+    $.getJSON("/~gallaghd/ymm/ymmdb.php?fmt=json&year=" + year, function (data) {
+        $.each(data, function (index, element) {
+            $("#makeSelect").append("<option value=\"" + element.id + "\">" + element.name + "</option>");
+        });
+    });
+}
+
+function getModel() {
+    var holder = document.getElementById("yearSelect");
+    var year = holder.value;
+    holder = document.getElementById("makeSelect");
+    var make = holder.value;
+    $("#modelSelect").html("");
+    $.getJSON("/~gallaghd/ymm/ymmdb.php?fmt=json&year=" + year + "&make=" + make, function (data) {
+        $.each(data, function (index, element) {
+            $("#modelSelect").append("<option value=\"" + element.id + "\">" + element.name + "</option>");
+        });
+    });
+}
+
+function initializeUR() {
     $.getJSON("/~gallaghd/cs3220/termProject/getPlan.php", function (data) {
         var catYear;
         var courseList = [];
@@ -64,17 +96,6 @@ function initializeUR() {
 
             var c = new Course(element.name, element.number, element.credits, smester, element.year);
             courseList.push(c);
-            var breaker = courseList[0];
-            breaker = courseList[1];
-            breaker = courseList[2];
-            breaker = courseList[3];
-            breaker = courseList[4];
-            breaker = courseList[5];
-            breaker = courseList[6];
-            breaker = courseList[7];
-            breaker = courseList[8];
-            breaker = courseList[9];
-            breaker = courseList[10];
 
         });
 
