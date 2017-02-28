@@ -23,40 +23,10 @@
 
         <!-- Personal JS -->
         <script type="text/javascript" src ="script/Project3.js"></script>
-        <script type="text/javascript" src ="script/form.js"></script>
-
-        <script>
-            $(function () {
-                $("#accordion").accordion({heightStyle: "content"});
-            });
-            $(document).ready(initializeUR());
-            $(document).ready(getYear());
-        </script>
-        <script>
-            $(document).ready(function () {
-                $("#search-table").DataTable({
-                    scrollY : '80px',
-                    scrollCollapse: true,
-                    paging:         false,
-                    ajax: {
-                        url: '/~gallaghd/cs3220/termProject/getCourseList.php',
-                        dataSrc: ''
-                    },
-                    columns: [
-                        {data: 'name'},
-                        {data: 'number'},
-                        {data: 'description'},
-                        {data: 'credits'}
-
-
-                    ]
-                });
-            });
-            $('#search-table').DataTable()
-        </script>
+        <script type="text/javascript" src ="script/accordian.js"></script>
+        <script type="text/javascript" src ="script/dataTable.js"></script>
     </head>
     <body>
-        <!--TODO: make the header dynamic-->
         <div id="header">
             <div class="dropdown">
                 <button class="dropbtn">Links</button>
@@ -132,7 +102,6 @@
                             aren't edible.  But everything in this room is edible.  
                             Even I'm edible.  But that's called cannibalism, my dear
                             children, and is in fact frowned upon in most societies</div>
-
                         <h3>Track</h3>
                         <div>Tacos</div>
                     </div>
@@ -149,7 +118,7 @@
                     <select id="modelSelect"></select>
                 </div>
                 <div id="BR">
-                    <table id="search-table" class="display">
+                    <table id="search-table" class="display compact nowrap">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -159,7 +128,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
                         </tbody>
                     </table>
                 </div>

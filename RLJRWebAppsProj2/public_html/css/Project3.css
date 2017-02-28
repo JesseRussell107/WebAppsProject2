@@ -1,5 +1,6 @@
 /*
 Author: Rich Lively and Jesse Russell
+Description: main/final CSS applied to project website
 */
 * {
     box-sizing: border-box;
@@ -99,6 +100,7 @@ body {
     float:left;
     width:80%;
     height: 100%;
+    padding-top: 5px;
 }
 
 /** Course table **/
@@ -186,6 +188,12 @@ body {
     overflow: auto;
 }
 
+#BL select {
+    display: block;
+    margin-top: 10px;
+    padding-right: 10px;
+}
+
 input[type=text] {
     border: none;
     border-bottom: 2px solid black;
@@ -270,4 +278,14 @@ th, td {
 #accordion .ui-accordion-header{
     background-color: #68A225;
     font-family: "Lucida Sans Unicode";
+}
+
+/** Search Table **/
+.dataTables_wrapper {
+    height: 100%;
+    font-size: 0.75em;
+}
+
+.dataTables_scroll {
+    height: calc(100% - 20px - 30px);
 }
