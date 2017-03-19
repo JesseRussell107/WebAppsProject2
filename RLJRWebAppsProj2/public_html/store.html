@@ -8,6 +8,27 @@
         <meta name="author" content="Jesse Russell and Rich Lively"/>
         <link rel="icon" href="img/api.png"/>
 
+        <style>
+            #sortable1, #sortable2 {
+                border: 1px solid #eee;
+                width: 142px;
+                min-height: 20px;
+                list-style-type: none;
+                margin: 0;
+                padding: 5px 0 0 0;
+                float: left;
+                margin-right: 10px;
+            }
+            #sortable1 li, #sortable2 li {
+                margin: 0 5px 5px 5px;
+                padding: 5px;
+                font-size: 1.2em;
+                width: 120px;
+            }
+        </style>
+
+
+
         <!-- CSS Sylesheets -->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
@@ -19,6 +40,7 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
         <!-- Personal JS -->
+        <script type="text/javascript" src="script/store.js"></script>
         <script type="text/javascript" src ="script/accordian.js"></script>
         <script type="text/javascript" src ="script/dataTable.js"></script>
     </head>
@@ -33,7 +55,7 @@
                 </div>
             </div>
         </header>
-        <div id='content'>
+        <div id='content' class="connectedSortable">
             <!-- Template for an item -->
             <input type='checkbox' name='i1' value='Item'/>
             <div class='item'>
@@ -41,10 +63,10 @@
                 <p>item</p>
                 <p>$</p>
             </div>
-            <button id='addToCheckout'>Add to Checkout</button>
+            <button id='addToCheckout' onclick='addtocart()'>Add to Checkout</button>
         </div>
         <footer>
-            <div id='left'></div>
+            <div id='left' class="connectedSortable"></div>
             <div id='right'>
                 <p># items: </p>
                 <p>Total Price: </p>
