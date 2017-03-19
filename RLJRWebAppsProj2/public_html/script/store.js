@@ -10,13 +10,12 @@ $(function () {
     }).disableSelection();
 });
 
-$(function onclick() {
+function addtocart() {
     $('#content > div').each(function (index, element) {
         if($("div > input").is(":checked")){
             $(this).appendTo("#left");
-            $(this).remove();
         }
     });
-});
+}
 
 
