@@ -35,11 +35,14 @@
         </header>
         <div id='content'>
             <!-- Template for an item -->
-            <input type='checkbox' name='i1' value='Item'/>
-            <div class='item'>
-                <img src='somewhere' alt="picture of _"/>
-                <p>item</p>
-                <p>$</p>
+            <div class='item tooltip'>    
+                <input type='checkbox' name='i1' value='Item' id='c1'/>
+                <label for='c1'>
+                    <img src='somewhere' alt="picture of _" class='itemImg'/>
+                    <span class='name'>item</span>
+                    <span class='amount'>$</span>
+                </label>
+                <span class='tooltiptext'>This is a description</span>
             </div>
             <button id='addToCheckout'>Add to Checkout</button>
         </div>
