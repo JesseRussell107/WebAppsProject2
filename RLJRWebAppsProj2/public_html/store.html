@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>API's Junk</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content="Simple store for a simple dog"/>
+        <meta name="author" content="Jesse Russell and Rich Lively"/>
+        <link rel="icon" href="img/api.png"/>
+
+        <!-- CSS Sylesheets -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
+        <link rel="stylesheet" href="css/store.css" type="text/css"/>
+
+        <!-- JQuery -->
+
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <!-- Personal JS -->
+        <script type="text/javascript" src ="script/accordian.js"></script>
+        <script type="text/javascript" src ="script/dataTable.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>API's Junk</h1>
+            <div class="dropdown">
+                <button class="dropbtn">Links</button>
+                <div class="dropdown-content">
+                    <a href="http://judah.cedarville.edu/~jrussel/cs3220.html">Homepage</a>
+                    <a href="http://judah.cedarville.edu/peopleschoice/index.php">People's Choice Awards</a>
+                </div>
+            </div>
+        </header>
+        <div id='content'>
+            <!-- Template for an item -->
+            <input type='checkbox' name='i1' value='Item'/>
+            <div class='item'>
+                <img src='somewhere' alt="picture of _"/>
+                <p>item</p>
+                <p>$</p>
+            </div>
+            <button id='addToCheckout'>Add to Checkout</button>
+        </div>
+        <footer>
+            <div id='left'></div>
+            <div id='right'>
+                <p># items: </p>
+                <p>Total Price: </p>
+                <button id='checkout'>Checkout</button>
+            </div>
+        </footer>
+    </body>
+</html>
