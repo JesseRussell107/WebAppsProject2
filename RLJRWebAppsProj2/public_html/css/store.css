@@ -200,7 +200,9 @@ footer {
 
 #wrapper {
     height: 10em;
-    position: relative }              /* 1 */
+    position: relative 
+}/* 1 */
+
 #wrapper p {
     margin: 0;
     position: absolute;               /* 2 */

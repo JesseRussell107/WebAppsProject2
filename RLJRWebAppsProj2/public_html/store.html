@@ -11,17 +11,15 @@
         <!-- CSS Sylesheets -->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
-        <link rel="stylesheet" href="css/store.css" type="text/css"/>
+        <link rel="stylesheet" href="css/store_main.css" type="text/css"/>
+        <link rel="stylesheet" href="css/store_store.css" type="text/css"/>
 
         <!-- JQuery -->
-
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
         <!-- Personal JS -->
         <script type="text/javascript" src="script/store.js"></script>
-        <script type="text/javascript" src ="script/accordian.js"></script>
-        <script type="text/javascript" src ="script/dataTable.js"></script>
     </head>
     <body>
         <header>
@@ -29,6 +27,7 @@
             <div class="dropdown">
                 <button class="dropbtn">Links</button>
                 <div class="dropdown-content">
+                    <a href='?login=true'>Login</a>
                     <a href="http://judah.cedarville.edu/~jrussel/cs3220.html">Homepage</a>
                     <a href="http://judah.cedarville.edu/peopleschoice/index.php">People's Choice Awards</a>
                 </div>
@@ -36,20 +35,29 @@
         </header>
         <div id='content' class="connectedSortable ui-droppable">
             <!-- Template for an item -->
-            <div class='item tooltip'>    
-                <input type='checkbox' name='i1' value='Item' id='c1'/>
-                <label for='c1'>
-                    <img src='https://staticdelivery.nexusmods.com/mods/110/images/74627-0-1459502036.jpg' height=100 width=100 alt="picture of _" class='itemImg'/>
-                    <span class='name'>item</span>
-                    <span class='amount'>$</span>
-                </label>
-                <span class='tooltiptext'>This is a description</span>
+            <div class='item'>
+                <input class='id' type='text' name='id' value='0'/>
+                <input type='text' name='name' value='axe' readonly/>
+                <input type='text' name='price' value='24.99' readonly/>
+                <input type='checkbox' name='i1'/>
+                <span class='liner'>It wants to axe you a question!</span>       
+                <span class='liner amount'>$2.99</span>
+                <span class='liner'>Axe</span> 
             </div>
-            <div id='addToCart'><button onclick='addtocart()'>Add to Cart</button></div>
+            <div class='item'>
+                <input class='id' type='text' name='id' value='0'/>
+                <input type='text' name='name' value='axe' readonly/>
+                <input type='text' name='price' value='24.99' readonly/>
+                <input type='checkbox' name='i1'/>
+                <span class='liner'>It wants to axe you a question!</span>       
+                <span class='liner amount'>$24.99</span>
+                <span class='liner'>Axe</span> 
+            </div>
         </div>
         <footer>
             <div id='left' class="connectedSortable ui-droppable"></div>
             <div id='right'>
+                <div id='addToCart'><button onclick='addtocart()'>Add to Cart</button></div>
                 <p id='count'># items: 0</p>
                 <p id='cost'>Total Price: $0.00</p>
                 <button id='checkout'>Checkout</button>
