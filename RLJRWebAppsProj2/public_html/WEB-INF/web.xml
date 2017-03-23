@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+  <context-param>
+     <param-name>driver</param-name>
+     <param-value>com.mysql.jdbc.Driver</param-value>
+  </context-param>
+  <context-param>
+     <param-name>connection</param-name>
+     <param-value>jdbc:mysql://james.cedarville.edu/cs4220</param-value>
+  </context-param>
+  <context-param>
+     <param-name>username</param-name>
+     <param-value>cs4220</param-value>
+  </context-param>
+  <context-param>
+     <param-name>password</param-name>
+     <param-value></param-value>
+  </context-param>
+  <servlet>
+    <!-- Arbitrary servlet name -->
+    <servlet-name>servlet</servlet-name>
+    <!-- The name of the class you want to run -->
+    <servlet-class>HelloWorld</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <!-- Must match the same as above -->
+    <servlet-name>servlet</servlet-name>
+    <!-- maps the servlet to a specific URL in this case it
+    would be judah/<your login name>/servlet/RequestInfoExample -->
+    <url-pattern>/HelloWorld</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <!-- Arbitrary servlet name -->
+    <servlet-name>servlet2</servlet-name>
+    <!-- The name of the class you want to run -->
+    <servlet-class>Store</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <!-- Must match the same as above -->
+    <servlet-name>servlet2</servlet-name>
+    <!-- maps the servlet to a specific URL in this case it
+    would be judah/<your login name>/servlet/RequestInfoExample -->
+    <url-pattern>/Store</url-pattern>
+  </servlet-mapping>
+</web-app>

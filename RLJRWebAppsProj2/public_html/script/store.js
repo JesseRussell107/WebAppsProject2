@@ -26,8 +26,8 @@ function addtocart() {
         var thing = $(this);
         if (thing.children("input[type=checkbox]").is(":checked")) {
             thing.appendTo("#left");
-            thing.children("input").attr("checked", false);
-            thing.children("input").attr("disabled", true);
+            thing.children("input[type=checkbox]").attr("checked", false);
+            thing.children("input[type=checkbox]").attr("disabled", true);
         }
     });
     var totcost = 0;
@@ -36,7 +36,7 @@ function addtocart() {
         var holder = $(this).find(".amount").text();
         totcost = totcost + parseFloat(holder.replace("$", ""));
         num = num + 1;
-        $(this).children("input").attr("disabled", true);
+        $(this).children("input[type=checkbox]").attr("disabled", true);
     });
 
     $("#count").text("# items: " + num);
