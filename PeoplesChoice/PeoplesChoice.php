@@ -21,29 +21,33 @@
             }
             echo "</tr>";
             while ($row = mysql_fetch_assoc($result)) {
-                echo "<tr><td>";
-                echo $row["Real_Name"];
-                echo "</td>";
-                $user = $row["User_ID"];
-                $query2 = "SELECT * from rjpc_team where User_ID = '$user';";
-                $result2 = mysql_query($query2) or die("Score Query Fail");
-                //Iterate over the projects
-                for ($projNum = 1; $projNum <= mysql_num_rows($result3); $projNum++) {
-                    echo "<td>";
-                    //print out this user's score in each of the table sections.
-                    $place = mysql_fetch_assoc($result2);
-                    if ($place["Project_ID"] == $projNum) {
-                        $holder = $place["Place"];
-                        echo "$holder";
-                    } else {
-                        echo "0";
-                    }
 
+                if ($row["Real_Name"] != "Admin") {
+                    echo "<tr><td>";
+                    echo $row["Real_Name"];
                     echo "</td>";
+                    $user = $row["User_ID"];
+                    $query2 = "SELECT * from rjpc_team where User_ID = '$user';";
+                    $result2 = mysql_query($query2) or die("Score Query Fail");
+                    //Iterate over the projects
+                    for ($projNum = 1; $projNum <= mysql_num_rows($result3); $projNum++) {
+                        echo "<td>";
+                        //print out this user's score in each of the table sections.
+                        $place = mysql_fetch_assoc($result2);
+                        if ($place["Project_ID"] == $projNum) {
+                            $holder = $place["Place"];
+                            echo "$holder";
+                        } else {
+                            echo "0";
+                        }
+
+                        echo "</td>";
+                    }
+                    echo "</tr>";
                 }
-                echo "</tr>";
             }
             echo"</table>";
+            $db.close();
             ?>
         </div>
     </body>
