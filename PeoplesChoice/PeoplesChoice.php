@@ -6,6 +6,7 @@
     </head>
     <body>
         <h2>People's Choice Awards</h2>
+        <a href="Results.php">Results</a>
         <div>
             <?php
             $db = mysql_connect("james.cedarville.edu", "cs4220", "");
