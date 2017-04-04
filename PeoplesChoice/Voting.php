@@ -11,6 +11,12 @@ if (isset($_POST['votenumber'])) {
 <html>
     <head>
         <title>Vote</title>
+        <!-- Jquery -->
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript">
+
+        </script>
     </head>
     <body>
         <a href="PeoplesChoice.php">Main Page</a>
@@ -22,6 +28,7 @@ if (isset($_POST['votenumber'])) {
                 mysql_select_db("cs4220");
                 $query1 = "Select * from rjpc_project;";
                 $result1 = mysql_query($query1) or die("Project Query Fail");
+                //If there are no open projects
                 if (mysql_num_rows($result1) == 0) {
                     echo "<option value='none'>None Open</option>";
                 } else {
@@ -46,7 +53,7 @@ if (isset($_POST['votenumber'])) {
                 <?php
                 //Will need to add another condition in here if the currently
                 //logged in user has already voted
-                //Will also need a way to post the 
+                //Will also need a way to post the writeins
                 if ($projNum == 0) {
                     echo "Please select a project";
                 } else {
@@ -84,6 +91,22 @@ if (isset($_POST['votenumber'])) {
                     echo "</table>";
                 }
                 ?>
+                <div id='writeins'>
+                    <?php
+                    echo "<select name='writeinteam1'>";
+                    $query = "SELECT * from rjpc_user group by Real_Name;";
+                    $result = mysql_query($query) or die("User query fail");
+                    while ($row = mysql_fetch_assoc($result)) {
+                        if ($row["Real_Name"] != "Admin") {
+                            echo "<option value=" . $row["User_ID"]
+                            . ">" . $row["Real_Name"] . "</option>";
+                        }
+                    }
+                    echo "<input type='text' name='writein1' />";
+                    ?>
+                    <!-- I need to ask Dr. G about how to do this part-->
+                    <button id='addwritein' type='button' value='addwritein'>Add a Write-In</button>
+                </div>
             </form>
         </div>
     </body>
