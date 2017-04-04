@@ -42,46 +42,48 @@ if (isset($_POST['votenumber'])) {
             <input type="submit" name="getballot" value="Go"/>
         </form>
         <div>
-            <form id='ballot'>
-                    <?php
-                    //Will need to add another condition in here if the currently
-                    //logged in user has already voted
-                    if ($projNum == 0) {
-                        echo "Please select a project";
-                    } else {
-                        echo "<input type='submit' name='sendballot' value='Submit my Ballot'><table>";
-                        $db = mysql_connect("james.cedarville.edu", "cs4220", "");
-                        mysql_select_db("cs4220");
-                        $query2 = "SELECT Team_ID, Total "
-                                . "FROM rjpc_vote "
-                                . "WHERE rjpc_vote.Project_ID = $projNum;";
-                        $result2 = mysql_query($query2) or die("Vote Query Fail");
-                        for ($j = 1; $j <= mysql_num_rows($result2); $j++) {
-                            $score = mysql_fetch_assoc($result2);
-                            $teamNum = $score["Team_ID"];
-                            $query3 = "SELECT Real_Name "
-                                    . "FROM rjpc_user, rjpc_team "
-                                    . "WHERE rjpc_team.Team_ID =$teamNum "
-                                    . "AND rjpc_team.Project_ID =$projNum "
-                                    . "AND rjpc_team.User_ID = rjpc_user.User_ID;";
-                            $result3 = mysql_query($query3);
-                            echo "<tr><td>";
-                            for ($k = 1; $k <= mysql_num_rows($result3); $k++) {
-                                $row = mysql_fetch_assoc($result3);
-                                $realname = $row["Real_Name"];
-                                echo"$realname <br>";
-                            }
-                            echo "</td><td>";
-                            echo "<input type='radio' name='first' value='$teamNum' checked> First";
-                            echo "</td><td>";
-                            echo "<input type='radio' name='second' value='$teamNum'> Second";
-                            echo "</td><td>";
-                            echo "<input type='radio' name='third' value='$teamNum'> Third";
-                            echo "</td></tr>";
+            <form id='ballot' method="post" action="submitBallot.php">
+                <?php
+                //Will need to add another condition in here if the currently
+                //logged in user has already voted
+                //Will also need a way to post the 
+                if ($projNum == 0) {
+                    echo "Please select a project";
+                } else {
+                    echo "<input type='text' name='projNum' value='$projNum' hidden />";
+                    echo "<input type='submit' name='sendballot' value='Submit my Ballot'><table>";
+                    $db = mysql_connect("james.cedarville.edu", "cs4220", "");
+                    mysql_select_db("cs4220");
+                    $query2 = "SELECT Team_ID, Total "
+                            . "FROM rjpc_vote "
+                            . "WHERE rjpc_vote.Project_ID = $projNum;";
+                    $result2 = mysql_query($query2) or die("Vote Query Fail");
+                    for ($j = 1; $j <= mysql_num_rows($result2); $j++) {
+                        $score = mysql_fetch_assoc($result2);
+                        $teamNum = $score["Team_ID"];
+                        $query3 = "SELECT Real_Name "
+                                . "FROM rjpc_user, rjpc_team "
+                                . "WHERE rjpc_team.Team_ID =$teamNum "
+                                . "AND rjpc_team.Project_ID =$projNum "
+                                . "AND rjpc_team.User_ID = rjpc_user.User_ID;";
+                        $result3 = mysql_query($query3);
+                        echo "<tr id=$teamNum><td>";
+                        for ($k = 1; $k <= mysql_num_rows($result3); $k++) {
+                            $row = mysql_fetch_assoc($result3);
+                            $realname = $row["Real_Name"];
+                            echo"$realname <br>";
                         }
-                        echo "</table>";
+                        echo "</td><td>";
+                        echo "<input type='radio' name='first' value='$teamNum' checked> First";
+                        echo "</td><td>";
+                        echo "<input type='radio' name='second' value='$teamNum'> Second";
+                        echo "</td><td>";
+                        echo "<input type='radio' name='third' value='$teamNum'> Third";
+                        echo "</td></tr>";
                     }
-                    ?>
+                    echo "</table>";
+                }
+                ?>
             </form>
         </div>
     </body>
