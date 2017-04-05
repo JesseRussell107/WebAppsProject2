@@ -55,10 +55,10 @@ if (isset($_POST['projectnumber'])) {
                     $result2 = mysql_query($query2) or die("Vote Query Fail");
                     for ($j = 1; $j <= mysql_num_rows($result2); $j++) {
                         $score = mysql_fetch_assoc($result2);
-                        $teamNum = $score["Team_ID"];
+                        $teamNumber = $score["Team_ID"];
                         $query3 = "SELECT Real_Name "
                                 . "FROM rjpc_user, rjpc_team "
-                                . "WHERE rjpc_team.Team_ID =$teamNum "
+                                . "WHERE rjpc_team.Team_ID =$teamNumber "
                                 . "AND rjpc_team.Project_ID =$projNum "
                                 . "AND rjpc_team.User_ID = rjpc_user.User_ID;";
                         $result3 = mysql_query($query3);
