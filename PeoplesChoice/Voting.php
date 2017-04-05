@@ -14,9 +14,7 @@ if (isset($_POST['votenumber'])) {
         <!-- Jquery -->
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script type="text/javascript">
-
-        </script>
+        <script src = "script/addWritein.js"></script>
     </head>
     <body>
         <a href="PeoplesChoice.php">Main Page</a>
@@ -30,7 +28,7 @@ if (isset($_POST['votenumber'])) {
                 $result1 = mysql_query($query1) or die("Project Query Fail");
                 //If there are no open projects
                 if (mysql_num_rows($result1) == 0) {
-                    echo "<option value='none'>None Open</option>";
+                    echo "<option value='0'>None Open</option>";
                 } else {
                     for ($i = 1; $i <= mysql_num_rows($result1); $i++) {
                         $project = mysql_fetch_assoc($result1);
@@ -67,45 +65,61 @@ if (isset($_POST['votenumber'])) {
                     $result2 = mysql_query($query2) or die("Vote Query Fail");
                     for ($j = 1; $j <= mysql_num_rows($result2); $j++) {
                         $score = mysql_fetch_assoc($result2);
-                        $teamNum = $score["Team_ID"];
+                        $teamNumber = $score["Team_ID"];
                         $query3 = "SELECT Real_Name "
                                 . "FROM rjpc_user, rjpc_team "
-                                . "WHERE rjpc_team.Team_ID =$teamNum "
+                                . "WHERE rjpc_team.Team_ID =$teamNumber "
                                 . "AND rjpc_team.Project_ID =$projNum "
                                 . "AND rjpc_team.User_ID = rjpc_user.User_ID;";
                         $result3 = mysql_query($query3);
-                        echo "<tr id=$teamNum><td>";
+                        echo "<tr id=$teamNumber><td>";
                         for ($k = 1; $k <= mysql_num_rows($result3); $k++) {
                             $row = mysql_fetch_assoc($result3);
                             $realname = $row["Real_Name"];
                             echo"$realname <br>";
                         }
                         echo "</td><td>";
-                        echo "<input type='radio' name='first' value='$teamNum' checked> First";
+                        echo "<input type='radio' name='first' value='$teamNumber' checked> First";
                         echo "</td><td>";
-                        echo "<input type='radio' name='second' value='$teamNum'> Second";
+                        echo "<input type='radio' name='second' value='$teamNumber'> Second";
                         echo "</td><td>";
-                        echo "<input type='radio' name='third' value='$teamNum'> Third";
+                        echo "<input type='radio' name='third' value='$teamNumber'> Third";
                         echo "</td></tr>";
                     }
                     echo "</table>";
                 }
                 ?>
                 <div id='writeins'>
-                    <?php
-                    echo "<select name='writeinteam1'>";
-                    $query = "SELECT * from rjpc_user group by Real_Name;";
-                    $result = mysql_query($query) or die("User query fail");
-                    while ($row = mysql_fetch_assoc($result)) {
-                        if ($row["Real_Name"] != "Admin") {
-                            echo "<option value=" . $row["User_ID"]
-                            . ">" . $row["Real_Name"] . "</option>";
-                        }
-                    }
-                    echo "<input type='text' name='writein1' />";
-                    ?>
                     <!-- I need to ask Dr. G about how to do this part-->
-                    <button id='addwritein' type='button' value='addwritein'>Add a Write-In</button>
+                    <button id='addwritein' type='button' value='addwritein' onclick="addWritein();">Add a Write-In</button>
+                    <div id="writeintemplate" class="writein">
+                        <?php
+                        echo "<select name=1>";
+                        $query = "SELECT Team_ID, Total "
+                                . "FROM rjpc_vote "
+                                . "WHERE rjpc_vote.Project_ID = $projNum;";
+                        $result = mysql_query($query) or die("Vote Query Fail");
+                        for ($j = 1; $j <= mysql_num_rows($result); $j++) {
+                            $score = mysql_fetch_assoc($result);
+                            $teamNum = $score["Team_ID"];
+                            $query4 = "SELECT Real_Name "
+                                    . "FROM rjpc_user, rjpc_team "
+                                    . "WHERE rjpc_team.Team_ID =$teamNum "
+                                    . "AND rjpc_team.Project_ID =$projNum "
+                                    . "AND rjpc_team.User_ID = rjpc_user.User_ID;";
+                            $result4 = mysql_query($query4);
+                            echo "<option id=$teamNum>";
+                            for ($k = 1; $k <= mysql_num_rows($result4); $k++) {
+                                $roww = mysql_fetch_assoc($result4);
+                                $realnme = $roww["Real_Name"];
+                                echo"$realnme ";
+                            }
+                            echo "</option>";
+                        }
+                        echo "</select>";
+                        echo "<input type='text' name='writein1' />";
+                        ?>
+                    </div>
                 </div>
             </form>
         </div>
