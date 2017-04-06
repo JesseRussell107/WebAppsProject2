@@ -46,8 +46,6 @@
         <h3>Placement (1st - 3rd)</h3>
         <div>
             <?php
-            $db = mysql_connect("james.cedarville.edu", "cs4220", "");
-            mysql_select_db("cs4220");
             $query = "SELECT * from rjpc_user group by Real_Name;";
             $result = mysql_query($query) or die("User query fail");
             $query3 = "Select * from rjpc_project;";
@@ -64,7 +62,7 @@
                     echo $row["Real_Name"];
                     echo "       </td>";
                     $user = $row["User_ID"];
-                    $query2 = "SELECT * from rjpc_team where User_ID = '$user';";
+                    $query2 = "SELECT * from rjpc_team where User_ID = '$user' group by Project_ID;";
                     $result2 = mysql_query($query2) or die("Score Query Fail");
                     //Iterate over the projects
                     for ($projNum = 1; $projNum <= mysql_num_rows($result3); $projNum++) {
