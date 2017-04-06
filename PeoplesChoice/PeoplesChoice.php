@@ -3,15 +3,45 @@
 <html>
     <head>
         <title>People's Choice Awards</title>
-        
+
     </head>
     <body>
         <h1>People's Choice Awards</h1>
         <h3 id="hello">Hello, Guest</h3>
         <br> 
+        <form action="Voting.php" method="post">
+            <select name="votenumber">
+                <?php
+                $db = mysql_connect("james.cedarville.edu", "cs4220", "");
+                mysql_select_db("cs4220");
+                $countquery = "Select count(Project_ID) from rjpc_project where Open = 1;";
+                $countresult = mysql_query($countquery);
+                $countrow = mysql_fetch_assoc($countresult);
+                if (intval($countrow["count(Project_ID)"]) > 0) {
+                    $voteenable = "enabled";
+                } else {
+                    $voteenable = "disabled";
+                }
+                $query1 = "Select * from rjpc_project where Open = 1;";
+                $result1 = mysql_query($query1) or die("Project Query Fail");
+                //If there are no open projects
+
+                for ($i = 1; $i <= mysql_num_rows($result1); $i++) {
+                    $project = mysql_fetch_assoc($result1);
+                    echo "<option value=" . $project["Project_ID"]
+                    . ">Project "
+                    . $project["Project_ID"] . "</option>";
+                }
+                if (isset($_POST['votenumber'])) {
+                    $projNum = $_POST['votenumber'];
+                }
+                ?>
+            </select>
+            <input type="submit" name="getballot" value="Vote" <?php echo $voteenable; ?>/>
+        </form>
+        <br>
+
         <a href="Results.php">Results</a>
-        <br> 
-        <a href="Voting.php">Vote</a>
         <br>
         <h3>Placement (1st - 3rd)</h3>
         <div>

@@ -22,7 +22,9 @@ if (isset($_POST['projectnumber'])) {
                 $result1 = mysql_query($query1) or die("Project Query Fail");
                 for ($i = 1; $i <= mysql_num_rows($result1); $i++) {
                     $project = mysql_fetch_assoc($result1);
-                    if ($project["Opened"] == 1 || $project["Closed"] == 1) {
+                    if ($project["Opened"] === 1) {
+                        echo "<option value=$i>Project $i</option>";
+                    } else if ($project["Closed"] === 1){
                         echo "<option value=$i>Project $i</option>";
                     }
                 }
@@ -71,6 +73,33 @@ if (isset($_POST['projectnumber'])) {
                         echo "</td>";
                         $total = $score["Total"];
                         echo"<td>$total</td><tr>";
+                    }
+                    ?>
+                </table>
+            </div>
+            <div id="writeins">
+                <h3>Write-in Awards</h3>
+                <table>
+                    <?php
+                    $query4 = "Select * from rjpc_write_in where Project_ID = $projNum;";
+                    $result4 = mysql_query($query4);
+                    while ($roww = mysql_fetch_assoc($result4)) {
+                        $team = $roww["Team_ID"];
+                        $query3 = "SELECT Real_Name "
+                                . "FROM rjpc_user, rjpc_team "
+                                . "WHERE rjpc_team.Team_ID =$team "
+                                . "AND rjpc_team.Project_ID =$projNum "
+                                . "AND rjpc_team.User_ID = rjpc_user.User_ID;";
+                        $result3 = mysql_query($query3);
+                        echo "<tr id=$team><td>";
+                        for ($k = 1; $k <= mysql_num_rows($result3); $k++) {
+                            $rowe = mysql_fetch_assoc($result3);
+                            $realname = $rowe["Real_Name"];
+                            echo"$realname <br>";
+                        }
+                        echo "</td><td>";
+                        echo $roww["Message"];
+                        echo "</td></tr>";
                     }
                     ?>
                 </table>
