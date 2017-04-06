@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = sanitize_input($_POST["pwd"]);
 
     if ($password === "password") {
-        $passErr = "<p>Can't use password \"password\"!</p>";
+        $passErr = "<p class='error'>Can't use password \"password\"!</p>";
     } else {
         $options = [
             'cost' => 10,
