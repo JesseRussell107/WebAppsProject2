@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         //bad login
         else if ($logResult === false) {
-            $logError = "<p class='error'>Incorrect password</p>";
+            $logError = "<p class='error' id='logError'>Incorrect password</p>";
         } else { //successfully logged in and we don't need to reset the password
             $_SESSION["isLoggedIn"] = true;
         }
@@ -82,7 +82,7 @@ function verify_user($usr, $pass) {
                 <?php
                 if ($_SESSION["isLoggedIn"] === true) {
                     ?>
-                    <input class="button" type="submit" name="log" value="Log out"/>
+                    <input class="button" id="logButton" type="submit" name="log" value="Log out"/>
                     <?php
                 } else {
                     ?>
@@ -90,27 +90,28 @@ function verify_user($usr, $pass) {
                     <select id="username" name="username" required="required">
                         <option value="">Select one</option>
                         <?php
-                        include "./tools/dbConnect.php";
                         $query = "SELECT User_ID,Real_Name FROM rjpc_user order by Real_Name";
                         $result = mysql_query($query) or die("Error: unsuccessful query");
                         for ($rowNum = 0; $rowNum < mysql_num_rows($result); $rowNum++) {
                             $row = mysql_fetch_array($result);
                             print("<option value='" . $row['User_ID'] . "'>" . $row['Real_Name'] . "</option>");
                         }
-                        mysql_close($db);
                         ?>
                     </select>
                     <label for="password">Password</label>
                     <input id="password" name="password" type="password" placeholder="password" autocomplete="off" required="required"/>
-                    <input class="button" type="submit" name="log" value="Log in"/>
+                    <input class="button" id="logButton" type="submit" name="log" value="Log in"/>
                     <?php
                 }
-                print($logError);
                 ?>
             </form>
             <a href='http://judah.cedarville.edu/peopleschoice/index.php'>Old PCA</a>
         </div>
     </div>
+    <?php
+    mysql_close($db);
+    print($logError);
+    ?>
 </nav>
 
 <?php

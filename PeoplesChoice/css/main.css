@@ -32,6 +32,10 @@ nav h1 {
     line-height: 55px;
 }
 
+#content {
+    padding: 10px;
+}
+
 /** Dropdown Menu **/
 
 .dropbtn {
@@ -82,6 +86,11 @@ nav h1 {
     display: block;
 }
 
+#logButton {
+    display: block;
+    margin: 10px auto;
+}
+
 /** Forms **/
 
 label {
@@ -94,17 +103,111 @@ option {
 
 input[type=password] {
     width: 100%;
+    height: 1.5em;
 }
 
 .button {
-    display: block;
+    display: inline;
     padding: 5px;
-    margin: 5px auto;
+    margin: 10px;
     font-size: 1em;
-    background-color: #F0F0F0
+    background-color: #F0F0F0;
 }
 
 .button:hover {
     cursor: pointer;
     background-color: #EAEAEA;
+}
+
+/** Tables **/
+
+table {
+    margin: auto;
+    border-collapse: collapse;
+    overflow-x: auto;
+}
+
+th, td {
+    padding: 10px;
+}
+
+td.reward {
+    padding: 0;
+}
+
+tr {
+    background-color: #f9f9f9;
+}
+
+tr:nth-child(even) {
+    background-color: #e4e4e4;
+}
+
+tr:hover {
+    background-color: #f1f1f1
+}
+
+th {
+    background-color: #5B8C24;
+    color: white;
+}
+
+td a {
+    text-decoration: none;
+    color: inherit;
+}
+
+td img {
+    height: 30px;
+    width: auto;
+}
+
+/** Classes **/
+
+.center {
+    text-align: center;
+}
+
+.centerDiv {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.actionForm {
+    display: inline-block;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+/** IDs **/
+
+#logError {
+    float: right;
+    height: 55px;
+    line-height: 55px;
+}
+
+#headerName {
+    position: relative;
+    display: inline-block;
+    height:100%;
+    float:right;
+    background-color: #5B8C24;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+#resetDiv {
+    background-color: #e4e4e4;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 10px;
 }

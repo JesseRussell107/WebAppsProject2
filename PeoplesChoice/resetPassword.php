@@ -22,20 +22,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         //now that we set the new password, we are logged in
         $_SESSION["isLoggedIn"] = true;
-        
+
         header("location:./PeoplesChoice.php");
         exit();
     }
 }
 ?>
-<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" onsubmit="return confirmPass()">
-    <label for="pass1">Password</label>
-    <input id="pass1" name="pwd" type="password" placeholder="password" autocomplete="off" required="required"/>
-    <label for="pass2">Confirm Password</label>
-    <input id="pass2" name="cpwd" type="password" placeholder="password" autocomplete="off" required="required"/>
-    <input class="button" type="submit" name="reset" />
-</form>
+<?php include "./header.php" ?>
+<div id="content">
+    <div class="centerDiv" id="resetDiv">
+        <p id="resetTitle">You need to reset your password</p>
+        <?php print($passErr); ?>
+        <form id="resetForm" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" onsubmit="return confirmPass()">
+            <label for="pass1">Password</label>
+            <input id="pass1" name="pwd" type="password" placeholder="password" autocomplete="off" required="required"/>
+            <label for="pass2">Confirm Password</label>
+            <input id="pass2" name="cpwd" type="password" placeholder="password" autocomplete="off" required="required"/>
+            <input class="button" type="submit" name="reset" />
+        </form>
+    </div>
+</div>
 <?php
-print($passErr);
 include "./footer.php";
 ?>

@@ -13,18 +13,18 @@ if (isset($_POST['projectnumber'])) {
     </head>
     <body>
         <a href="PeoplesChoice.php">Main Page</a>
-        <form action="" method="post">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <select name="projectnumber">
                 <?php
                 $db = mysql_connect("james.cedarville.edu", "cs4220", "");
                 mysql_select_db("cs4220");
-                $query1 = "Select * from rjpc_project;";
+                $query1 = "Select * from rjpc_project order by Project_ID;";
                 $result1 = mysql_query($query1) or die("Project Query Fail");
                 for ($i = 1; $i <= mysql_num_rows($result1); $i++) {
                     $project = mysql_fetch_assoc($result1);
-                    if ($project["Opened"] === 1) {
-                        echo "<option value=$i>Project $i</option>";
-                    } else if ($project["Closed"] === 1){
+                    if ($project["Open"] == 1) {
+                        echo "";
+                    } else if ($project["Closed"] == 1){
                         echo "<option value=$i>Project $i</option>";
                     }
                 }

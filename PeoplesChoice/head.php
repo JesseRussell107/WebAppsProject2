@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta name="description" content="Simple homepage for web-apps project"/>
         <meta name="author" content="Jesse Russell and Rich Lively"/>
+        <link rel="icon" href="img/api.png"/>
 
         <!-- CSS Sylesheets -->
         <link rel="stylesheet" href="css/main.css" type="text/css"/>

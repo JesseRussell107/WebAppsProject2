@@ -1,15 +1,13 @@
 function confirmPass() {
     var pass1 = document.getElementById("pass1").value;
     var pass2 = document.getElementById("pass2").value;
-    var ok = true;
     if (pass1 !== pass2) {
-        //alert("Passwords Do not match");
-        document.getElementById("pass1").style.borderColor = "#E34234";
-        document.getElementById("pass2").style.borderColor = "#E34234";
-        ok = false;
+        $("#resetTitle").append("<p class='error'>Passwords don't match</p>");
+        $("#pass1").css("border-bottom: 1px solid red");
+        $("#pass2").css("border-bottom: 1px solid red");
+        return false;
     }
     else {
-        alert("Passwords Match!!!");
+        return true;
     }
-    return ok;
 }
