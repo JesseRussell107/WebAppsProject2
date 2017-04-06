@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <input id="pass1" name="pwd" type="password" placeholder="password" autocomplete="off" required="required"/>
             <label for="pass2">Confirm Password</label>
             <input id="pass2" name="cpwd" type="password" placeholder="password" autocomplete="off" required="required"/>
-            <input class="button" type="submit" name="reset" />
+            <input class="button" type="submit" name="reset" value="Change Password" />
         </form>
     </div>
 </div>
