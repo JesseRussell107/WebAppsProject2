@@ -32,7 +32,7 @@ if (isset($_POST['votenumber'])) {
                 } else {
                     for ($i = 1; $i <= mysql_num_rows($result1); $i++) {
                         $project = mysql_fetch_assoc($result1);
-                        if ($project["Open"] == 1 && $project["Closed"] == 0) {
+                        if ($project["Open"] == 1) {
                             echo "<option value=" . $project["Project_ID"]
                             . ">Project "
                             . $project["Project_ID"] . "</option>";

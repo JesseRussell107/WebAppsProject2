@@ -8,17 +8,25 @@
         <a href="Results.php">Results</a>
         <br> 
         <?php
-        $first = $_POST["first"];
-        $second = $_POST["second"];
-        $third = $_POST["third"];
+        if (isset($_POST["first"])) {
+            $first = $_POST["first"];
+        }
+        if (isset($_POST["second"])) {
+            $second = $_POST["second"];
+        }
+        if (isset($_POST["third"])) {
+            $third = $_POST["third"];
+        }
         $projNum = $_POST["projNum"];
-        if ($first == $second || $first == $third || $second == $third) {
+        if (!isset($first) || !isset($second) || !isset($third)) {
+            echo "You didn't vote for all the positions. Grow a backbone, ya pansy!";
+        } else if ($first == $second || $first == $third || $second == $third) {
             echo "You moron! You can't make someone first second and third!";
         } else {
             $db = mysql_connect("james.cedarville.edu", "cs4220", "");
             mysql_select_db("cs4220");
             //*******************************************
-            $dummy = $_SESSION["userName"]; //Jesse's ID
+            $dummy = $_SESSION["userName"];
             //*******************************************
             $query1 = "Select * from rjpc_team where User_ID = $dummy" .
                     " and Project_ID = $projNum";
@@ -44,10 +52,28 @@
                                 . " AND `rjpc_vote`.`Project_ID` = $projNum;") or die("Error voting third");
                 mysql_query("UPDATE `cs4220`.`rjpc_vote` SET `Total` = Total + 1 WHERE `rjpc_vote`.`Team_ID` = $third"
                                 . " AND `rjpc_vote`.`Project_ID` = $projNum;") or die("Error voting third total");
+                
+                mysql_query("UPDATE rjpc_team SET Place = 0 WHERE Project_ID = $projNum AND Place = 1") or die ("Error zeroing first");
+                mysql_query("UPDATE rjpc_team SET Place = 0 WHERE Project_ID = $projNum AND Place = 2") or die ("Error zeroing second");
+                mysql_query("UPDATE rjpc_team SET Place = 0 WHERE Project_ID = $projNum AND Place = 3") or die ("Error zeroing third");
 
+                $placement = mysql_query("SELECT * FROM rjpc_vote Where Project_ID = $projNum GROUP BY Total DESC LIMIT 3;") 
+                        or die("Error with placement query");
+                
+                
+                
+                $firstplace = mysql_fetch_assoc($placement);
+                $secondplace = mysql_fetch_assoc($placement);
+                $thirdplace = mysql_fetch_assoc($placement);
+                
+                $firstteam = $firstplace["Team_ID"];
+                mysql_query("UPDATE rjpc_team SET Place = 1 WHERE Project_ID = $projNum AND Team_ID = $firstteam");
 
-
-
+                $secondteam = $firstplace["Team_ID"];
+                mysql_query("UPDATE rjpc_team SET Place = 2 WHERE Project_ID = $projNum AND Team_ID = $secondteam");
+                
+                $thirdteam = $firstplace["Team_ID"];
+                mysql_query("UPDATE rjpc_team SET Place = 3 WHERE Project_ID = $projNum AND Team_ID = $thirdteam");
                 //need a for loop to post the write ins
                 //This will need to be fixed
                 $haswriteins = true;
@@ -67,7 +93,7 @@
                 }
                 echo "Thank you for your votes.";
                 mysql_query("UPDATE `cs4220`.`rjpc_team` SET `Has_Voted` = '1' WHERE"
-                        . " `rjpc_team`.`User_ID` = $dummy AND `rjpc_team`.`Project_ID` = $projNum;")
+                                . " `rjpc_team`.`User_ID` = $dummy AND `rjpc_team`.`Project_ID` = $projNum;")
                         or die('Error updating voting record');
             }
         }
