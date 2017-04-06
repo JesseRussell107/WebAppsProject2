@@ -2,25 +2,39 @@
 <?php include "./logIn.php" ?>
 <div id="content">
     <?php
+    //find out if we should disable viewing (no projects to view)
+    $db = mysql_connect("james.cedarville.edu", "cs4220", "");
+    mysql_select_db("cs4220");
+    $countquery = "Select count(Project_ID) from rjpc_project where Closed = 1;";
+    $countresult = mysql_query($countquery);
+    $countrow = mysql_fetch_assoc($countresult);
+    if (intval($countrow["count(Project_ID)"]) > 0) {
+        $selectMenu = "";
+        $selectenable = "enabled";
+    } else {
+        $selectMenu = "hidden";
+        $selectenable = "disabled";
+    }
     if ($_SESSION["isLoggedIn"]) {
+        //find out if we should disable voting
+        $countquery = "Select count(Project_ID) from rjpc_project where Open = 1;";
+        $countresult = mysql_query($countquery);
+        $countrow = mysql_fetch_assoc($countresult);
+        if (intval($countrow["count(Project_ID)"]) > 0) {
+            if ($_SESSION["username"] === 1) {
+                $voteMenu = "hidden";
+                $voteenable = "disabled";
+            } else {
+                $voteenable = "enabled";
+            }
+        } else {
+            $voteMenu = "hidden";
+            $voteenable = "disabled";
+        }
         ?>
         <form class="actionForm" action="Voting.php" method="post">
-            <select name="votenumber">
+            <select name="votenumber" <?php echo $voteMenu; ?>>
                 <?php
-                $db = mysql_connect("james.cedarville.edu", "cs4220", "");
-                mysql_select_db("cs4220");
-                $countquery = "Select count(Project_ID) from rjpc_project where Open = 1;";
-                $countresult = mysql_query($countquery);
-                $countrow = mysql_fetch_assoc($countresult);
-                if (intval($countrow["count(Project_ID)"]) > 0) {
-                    if ($_SESSION["username"] === 1) {
-                        $voteenable = "disabled";
-                    } else {
-                        $voteenable = "enabled";
-                    }
-                } else {
-                    $voteenable = "disabled";
-                }
                 $query1 = "Select * from rjpc_project where Open = 1;";
                 $result1 = mysql_query($query1) or die("Project Query Fail");
                 //If there are no open projects
@@ -43,10 +57,8 @@
     ?>
 
     <form class="actionForm" action="Results.php" method="post">
-        <select name="projectnumber">
+        <select name="projectnumber" <?php echo $selectMenu; ?>>
             <?php
-            $db = mysql_connect("james.cedarville.edu", "cs4220", "");
-            mysql_select_db("cs4220");
             $query1 = "Select * from rjpc_project order by Project_ID;";
             $result1 = mysql_query($query1) or die("Project Query Fail");
             for ($i = 1; $i <= mysql_num_rows($result1); $i++) {
@@ -62,7 +74,7 @@
             }
             ?>
         </select>
-        <input class="button" type="submit" name="submit" value="View Results"/>
+        <input class="button" type="submit" name="submit" value="View Results" <?php echo $selectenable; ?>/>
     </form>
     <?php
     $query = "SELECT * from rjpc_user group by Real_Name;";
