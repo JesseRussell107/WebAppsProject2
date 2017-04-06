@@ -108,7 +108,7 @@ if (isset($_POST['votenumber'])) {
                                     . "AND rjpc_team.Project_ID =$projNum "
                                     . "AND rjpc_team.User_ID = rjpc_user.User_ID;";
                             $result4 = mysql_query($query4);
-                            echo "<option id=$teamNum>";
+                            echo "<option value=$teamNum>";
                             for ($k = 1; $k <= mysql_num_rows($result4); $k++) {
                                 $roww = mysql_fetch_assoc($result4);
                                 $realnme = $roww["Real_Name"];

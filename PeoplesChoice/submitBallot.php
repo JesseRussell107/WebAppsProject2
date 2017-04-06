@@ -17,9 +17,9 @@
         } else {
             $db = mysql_connect("james.cedarville.edu", "cs4220", "");
             mysql_select_db("cs4220");
-            //need a way to tie the currently logged in user to this.
-            $dummy = 138; //Jesse's ID
-            $teamNumber = 5; //Jesse's team for project 2
+            //*******************************************
+            $dummy = $_SESSION["userName"]; //Jesse's ID
+            //*******************************************
             $query1 = "Select * from rjpc_team where User_ID = $dummy" .
                     " and Project_ID = $projNum";
             //This will return one row
@@ -45,30 +45,30 @@
                 mysql_query("UPDATE `cs4220`.`rjpc_vote` SET `Total` = Total + 1 WHERE `rjpc_vote`.`Team_ID` = $third"
                                 . " AND `rjpc_vote`.`Project_ID` = $projNum;") or die("Error voting third total");
 
-                mysql_query("UPDATE `cs4220`.`rjpc_team` SET `Has_Voted` = '1' WHERE `rjpc_team`.`Team_ID` = "
-                                . "$teamNumber AND `rjpc_team`.`User_ID` = $dummy AND `rjpc_team`.`Project_ID` = $projNum;")
-                        or die('Error updating voting record');
+
 
 
                 //need a for loop to post the write ins
                 //This will need to be fixed
                 $haswriteins = true;
                 $i = 0;
-                while($haswriteins){
+                while ($haswriteins) {
                     $i = $i + 1;
-                    $thingname = "writein" .(String) $i;
-                    if(isset($_POST[$thingname])){
+                    $thingname = "writein" . (String) $i;
+                    if (isset($_POST[$thingname])) {
                         //Do a query
                         $team = $_POST[(String) $i];
                         $message = $_POST[$thingname];
-                        $query5 = "Insert into rjpc_writein (Team_ID, Project_ID, Message) "
-                                . "Values ($team, $projNum, $message);";
-                        $mysql_query($query5) or die("Error sending write-ins");
+                        mysql_query("Insert into rjpc_write_in (Team_ID, Project_ID, Message) "
+                                        . "Values ($team, $projNum, \"$message\");") or die("Error sending write-ins");
                     } else {
                         $haswriteins = false;
                     }
                 }
                 echo "Thank you for your votes.";
+                mysql_query("UPDATE `cs4220`.`rjpc_team` SET `Has_Voted` = '1' WHERE"
+                        . " `rjpc_team`.`User_ID` = $dummy AND `rjpc_team`.`Project_ID` = $projNum;")
+                        or die('Error updating voting record');
             }
         }
         ?>
