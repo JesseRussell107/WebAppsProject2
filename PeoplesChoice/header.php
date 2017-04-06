@@ -3,6 +3,7 @@
     <div class='dropdown'>
         <button onclick='dropdown()' class='dropbtn'>
             <?php
+            session_start();
             include "tools/dbConnect.php";
             if ($_SESSION["isLoggedIn"] === true) {
                 //find the user's real name

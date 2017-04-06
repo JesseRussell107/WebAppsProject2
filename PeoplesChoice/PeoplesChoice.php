@@ -5,7 +5,7 @@
     //find out if we should disable viewing (no projects to view)
     $db = mysql_connect("james.cedarville.edu", "cs4220", "");
     mysql_select_db("cs4220");
-    $countquery = "Select count(Project_ID) from rjpc_project where Closed = 1;";
+    $countquery = "Select count(Project_ID) from rjpc_project where Open = 1 or Closed = 1;";
     $countresult = mysql_query($countquery);
     $countrow = mysql_fetch_assoc($countresult);
     if (intval($countrow["count(Project_ID)"]) > 0) {
@@ -59,15 +59,11 @@
     <form class="actionForm" action="Results.php" method="post">
         <select name="projectnumber" <?php echo $selectMenu; ?>>
             <?php
-            $query1 = "Select * from rjpc_project order by Project_ID;";
+            $query1 = "Select * from rjpc_project where Open = 1 or Closed = 1 order by Project_ID ;";
             $result1 = mysql_query($query1) or die("Project Query Fail");
             for ($i = 1; $i <= mysql_num_rows($result1); $i++) {
                 $project = mysql_fetch_assoc($result1);
-                if ($project["Open"] == 1) {
-                    echo "";
-                } else if ($project["Closed"] == 1) {
-                    echo "<option value=$i>Project $i</option>";
-                }
+                echo "<option value=$i>Project $i</option>";
             }
             if (isset($_POST['projectnumber'])) {
                 $projNum = $_POST['projectnumber'];

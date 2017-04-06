@@ -122,9 +122,10 @@ input[type=password] {
 /** Tables **/
 
 table {
-    margin: auto;
+    margin: 20px auto;
     border-collapse: collapse;
     overflow-x: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
 th, td {
@@ -210,4 +211,8 @@ td img {
     background-color: #e4e4e4;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 10px;
+}
+
+#writeins {
+    margin-top: 30px;
 }

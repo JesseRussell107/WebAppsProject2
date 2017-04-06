@@ -84,6 +84,11 @@ function verify_user($usr, $pass) {
                     ?>
                     <input class="button" id="logButton" type="submit" name="log" value="Log out"/>
                     <?php
+                    if ($_SESSION["userName"] == 1) {
+                        ?>
+                        <a href='./admin.php'>Admin Console</a>
+                        <?php
+                    }
                 } else {
                     ?>
                     <label for="username">Name</label>
