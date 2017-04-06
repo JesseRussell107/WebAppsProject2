@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </button>
 </nav>
 <div id="content">
-    <div class="centerDiv" id="resetDiv">
+    <div class="centerDiv section">
         <p id="resetTitle">You need to reset your password</p>
         <?php print($passErr); ?>
         <form id="resetForm" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" onsubmit="return confirmPass()">

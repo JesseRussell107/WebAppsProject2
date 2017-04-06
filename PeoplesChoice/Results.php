@@ -17,7 +17,7 @@ include "./header.php";
             $result1 = mysql_query($query1) or die("Project Query Fail");
             for ($i = 1; $i <= mysql_num_rows($result1); $i++) {
                 $project = mysql_fetch_assoc($result1);
-                echo "<option value=$i>Project $i</option>";
+                echo "<option value=".$project['Project_ID'].">Project ".$project['Project_ID']."</option>";
             }
             if (isset($_POST['projectnumber'])) {
                 $projNum = $_POST['projectnumber'];

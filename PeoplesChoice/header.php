@@ -3,7 +3,10 @@
     <div class='dropdown'>
         <button onclick='dropdown()' class='dropbtn'>
             <?php
-            session_start();
+            //only start a session if none exists (lots of interlocking files)
+            if(session_status()==PHP_SESSION_NONE) {
+                session_start();
+            }
             include "tools/dbConnect.php";
             if ($_SESSION["isLoggedIn"] === true) {
                 //find the user's real name
