@@ -8,6 +8,7 @@
         <meta name="author" content="Jesse Russell and Rich Lively"/>
 
         <!-- CSS Sylesheets -->
+        <link rel="stylesheet" href="css/main.css" type="text/css"/>
 
         <!-- JQuery -->
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -16,5 +17,6 @@
         <!-- Personal JS -->
         <script src = "script/addWritein.js"></script>
         <script src = "script/confirmPass.js"></script>
+        <script src = "script/dropdown.js"></script>
     </head>
     <body>

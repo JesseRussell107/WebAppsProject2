@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         //bad login
         else if ($logResult === false) {
-            $logError = "<p>Incorrect password</p>";
+            $logError = "<p class='error'>Incorrect password</p>";
         } else { //successfully logged in and we don't need to reset the password
             $_SESSION["isLoggedIn"] = true;
         }
@@ -60,90 +60,104 @@ function verify_user($usr, $pass) {
     }
 }
 ?>
-<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <?php
-    if ($_SESSION["isLoggedIn"] === true) {
-        include "tools/dbConnect.php";
-        //find the user's real name
-        $query = "SELECT Real_Name FROM rjpc_user WHERE User_ID='" . $_SESSION['userName'] . "';";
-        $result = mysql_query($query) or die("Error: unsuccessful query");
-        $row = mysql_fetch_array($result);
-        print("<h1>" . $row["Real_Name"] . "</h1>")
-        ?>
-        <input class="button" type="submit" name="log" value="Log out"/>
-        <?php
-    } else {
-        ?>
-        <h1>Guest</h1>
-        <label for="username">Name</label>
-        <select id="username" name="username" required="required">
-            <!-- TODO: dynamically read in options from database -->
-            <option value="">Select one</option>
+<nav>
+    <h1>People's Choice Awards</h1>
+    <div class='dropdown'>
+        <button onclick='dropdown()' class='dropbtn'>
             <?php
-            include "./tools/dbConnect.php";
-            $query = "SELECT User_ID,Real_Name FROM rjpc_user order by Real_Name";
-            $result = mysql_query($query) or die("Error: unsuccessful query");
-            for ($rowNum = 0; $rowNum < mysql_num_rows($result); $rowNum++) {
+            include "tools/dbConnect.php";
+            if ($_SESSION["isLoggedIn"] === true) {
+                //find the user's real name
+                $query = "SELECT Real_Name FROM rjpc_user WHERE User_ID='" . $_SESSION['userName'] . "';";
+                $result = mysql_query($query) or die("Error: unsuccessful query");
                 $row = mysql_fetch_array($result);
-                print("<option value='" . $row['User_ID'] . "'>" . $row['Real_Name'] . "</option>");
+                print($row["Real_Name"]);
+            } else {
+                print("Guest");
             }
-            mysql_close($db);
             ?>
-        </select>
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" placeholder="password" autocomplete="off" required="required"/>
-        <input class="button" type="submit" name="log" value="Log in"/>
-        <?php
-    }
-    ?>
+        </button>
+        <div id='myDropdown' class='dropdown-content'>
+            <form id="logForm" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                <?php
+                if ($_SESSION["isLoggedIn"] === true) {
+                    ?>
+                    <input class="button" type="submit" name="log" value="Log out"/>
+                    <?php
+                } else {
+                    ?>
+                    <label for="username">Name</label>
+                    <select id="username" name="username" required="required">
+                        <option value="">Select one</option>
+                        <?php
+                        include "./tools/dbConnect.php";
+                        $query = "SELECT User_ID,Real_Name FROM rjpc_user order by Real_Name";
+                        $result = mysql_query($query) or die("Error: unsuccessful query");
+                        for ($rowNum = 0; $rowNum < mysql_num_rows($result); $rowNum++) {
+                            $row = mysql_fetch_array($result);
+                            print("<option value='" . $row['User_ID'] . "'>" . $row['Real_Name'] . "</option>");
+                        }
+                        mysql_close($db);
+                        ?>
+                    </select>
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" placeholder="password" autocomplete="off" required="required"/>
+                    <input class="button" type="submit" name="log" value="Log in"/>
+                    <?php
+                }
+                print($logError);
+                ?>
+            </form>
+            <a href='http://judah.cedarville.edu/peopleschoice/index.php'>Old PCA</a>
+        </div>
+    </div>
+</nav>
 
-    <?php
-    /*
-     * adminPassword
-     * test
-     * howdy
-     * TODO:
-     * Admin control panel
-     * Log in
-     * Log out
-     * Change password on password
-     * Custom backgrounds
-     * Use MySQLi
-     */
+<?php
+/*
+ * adminPassword
+ * test
+ * howdy
+ * TODO:
+ * Admin control panel
+ * Log in
+ * Log out
+ * Change password on password
+ * Custom backgrounds
+ * Use MySQLi
+ */
 // put your code here
 
-    /**
-     * This code will benchmark your server to determine how high of a cost you can
-     * afford. You want to set the highest cost that you can without slowing down
-     * you server too much. 8-10 is a good baseline, and more is good if your servers
-     * are fast enough. The code below aims for ≤ 50 milliseconds stretching time,
-     * which is a good baseline for systems handling interactive logins.
-     */
-    /*
-      $timeTarget = 0.05; // 50 milliseconds
+/**
+ * This code will benchmark your server to determine how high of a cost you can
+ * afford. You want to set the highest cost that you can without slowing down
+ * you server too much. 8-10 is a good baseline, and more is good if your servers
+ * are fast enough. The code below aims for ≤ 50 milliseconds stretching time,
+ * which is a good baseline for systems handling interactive logins.
+ */
+/*
+  $timeTarget = 0.05; // 50 milliseconds
 
-      $cost = 8;
-      do {
-      $cost++;
-      $start = microtime(true);
-      password_hash("test", PASSWORD_BCRYPT, ["cost" => $cost]);
-      $end = microtime(true);
-      } while (($end - $start) < $timeTarget);
+  $cost = 8;
+  do {
+  $cost++;
+  $start = microtime(true);
+  password_hash("test", PASSWORD_BCRYPT, ["cost" => $cost]);
+  $end = microtime(true);
+  } while (($end - $start) < $timeTarget);
 
-      print("Appropriate Cost Found: " . $cost . "\n");
+  print("Appropriate Cost Found: " . $cost . "\n");
 
-      $options = [
-      'cost' => 10,
-      ];
-      $pass = password_hash("test", PASSWORD_DEFAULT, $options);
-      print($pass . "\n");
-      $succeed = password_verify("test", $pass);
-      if ($succeed == true) {
-      print("Hooray, it matched!");
-      } else {
-      print("It failed...");
-      }
-     */
-    ?>
-</form>
-<?php print($logError);?>
+  $options = [
+  'cost' => 10,
+  ];
+  $pass = password_hash("test", PASSWORD_DEFAULT, $options);
+  print($pass . "\n");
+  $succeed = password_verify("test", $pass);
+  if ($succeed == true) {
+  print("Hooray, it matched!");
+  } else {
+  print("It failed...");
+  }
+ */
+?>

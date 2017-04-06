@@ -1,5 +1,4 @@
 <?php include "./head.php" ?>
-<h1>People's Choice Awards</h1>
 <?php include "./logIn.php" ?>
 <br> 
 <form action="Voting.php" method="post">

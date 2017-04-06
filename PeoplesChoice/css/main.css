@@ -1,0 +1,110 @@
+/*
+Author: Rich Lively and Jesse Russell
+Description: primary CSS applied across website
+*/
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color:#D4EFDF;
+    height: 100%;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+nav {
+    height: 55px;
+    background-color: #B9B9B9;
+}
+
+nav h1 {
+    float: left;
+    text-align: center;
+    height: 55px;
+    line-height: 55px;
+}
+
+/** Dropdown Menu **/
+
+.dropbtn {
+    background-color: #5B8C24;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    height:100%;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #68A225;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    height:100%;
+    float:right;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    padding: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.show {
+    display: block;
+}
+
+/** Forms **/
+
+label {
+    font-size: 0.9em;
+}
+
+option {
+    padding-right: 10px;
+}
+
+input[type=password] {
+    width: 100%;
+}
+
+.button {
+    display: block;
+    padding: 5px;
+    margin: 5px auto;
+    font-size: 1em;
+    background-color: #F0F0F0
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: #EAEAEA;
+}
