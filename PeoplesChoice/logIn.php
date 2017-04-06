@@ -5,14 +5,12 @@ if (!isset($_SESSION["isLoggedIn"])) {
     $_SESSION["isLoggedIn"] = false;
     $_SESSION["userName"] = "";
 }
-
 //handles POST
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $username = sanitize_input($_POST["username"]);
-    $password = sanitize_input($_POST["password"]);
-
     //what button did they press?
     if ($_POST["log"] === "Log in") {
+        $username = sanitize_input($_POST["username"]);
+        $password = sanitize_input($_POST["password"]);
         $logResult = verify_user($username, $password);
         //need to reset password
         if ($logResult === true && $password === "password") {
@@ -21,9 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         //bad login
         else if ($logResult === false) {
-            
+            $logError = "Incorrect password";
         }
-    } else if ($logged === "Log out") {
+    } else if ($_POST["log"] === "Log out") {
         $_SESSION["isLoggedIn"] = false;
         $_SESSION["userName"] = "";
     } else {
@@ -53,10 +51,10 @@ function verify_user($usr, $pass) {
     //connect to database
     include "tools/dbConnect.php";
     //find the user's password
-    $query = "SELECT * FROM user WHERE username='$usr';";
+    $query = "SELECT Username,Password FROM rjpc_user WHERE User_ID='$usr';";
     $result = mysql_query($query) or die("Error: unsuccessful query");
     $row = mysql_fetch_array($result);
-    $hashPass = $row["password"];
+    $hashPass = $row["Password"];
     mysql_close($db);
     //verify the passwords are the same
     $succeed = password_verify($pass, $hashPass);
@@ -80,26 +78,43 @@ function verify_user($usr, $pass) {
         <title>Test Login</title>
     </head>
     <body>
-
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <?php
             if ($_SESSION["isLoggedIn"] === true) {
-                
+                include "tools/dbConnect.php";
+                //find the user's real name
+                $query = "SELECT Real_Name FROM rjpc_user WHERE User_ID='" . $_SESSION['userName'] . "';";
+                $result = mysql_query($query) or die("Error: unsuccessful query");
+                $row = mysql_fetch_array($result);
+                print("<h1>" . $row["Real_Name"] . "</h1>")
+                ?>
+                <input class="button" type="submit" name="log" value="Log out"/>
+                <?php
             } else {
-                
+                ?>
+                <h1>Guest</h1>
+                <label for="username">Name</label>
+                <select id="username" name="username" required="required">
+                    <!-- TODO: dynamically read in options from database -->
+                    <option value="">Select one</option>
+                    <?php
+                    include "./tools/dbConnect.php";
+                    $query = "SELECT User_ID,Real_Name FROM rjpc_user order by Real_Name";
+                    $result = mysql_query($query) or die("Error: unsuccessful query");
+                    for ($rowNum = 0; $rowNum < mysql_num_rows($result); $rowNum++) {
+                        $row = mysql_fetch_array($result);
+                        print("<option value='" . $row['User_ID'] . "'>" . $row['Real_Name'] . "</option>");
+                    }
+                    mysql_close($db);
+                    ?>
+                </select>
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" placeholder="password" autocomplete="off" required="required"/>
+                <input class="button" type="submit" name="log" value="Log in"/>
+                <?php
             }
             ?>
-            <label for="username">Name</label>
-            <select id="username" name="username" required="required">
-                <!-- TODO: dynamically read in options from database -->
-                <option value="">Select one</option>
-                <option value="admin">Administrator</option>
-                <option value="rwlively">Rich Lively</option>
-                <option value="jrussell">Jesse Russell</option>
-            </select>
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password" placeholder="password" autocomplete="off" required="required"/>
-            <input class="button" type="submit" name="log" value="Log in"/>
+
             <?php
             /*
              * adminPassword
@@ -111,10 +126,10 @@ function verify_user($usr, $pass) {
              * Log out
              * Change password on password
              * Custom backgrounds
+             * Use MySQLi
              */
 // put your code here
-            ?>
-            <?php
+
             /**
              * This code will benchmark your server to determine how high of a cost you can
              * afford. You want to set the highest cost that you can without slowing down
@@ -122,7 +137,7 @@ function verify_user($usr, $pass) {
              * are fast enough. The code below aims for ≤ 50 milliseconds stretching time,
              * which is a good baseline for systems handling interactive logins.
              */
-            /*
+            
               $timeTarget = 0.05; // 50 milliseconds
 
               $cost = 8;
@@ -136,17 +151,17 @@ function verify_user($usr, $pass) {
               print("Appropriate Cost Found: " . $cost . "\n");
 
               $options = [
-              'cost' => $cost,
+              'cost' => 10,
               ];
-              $pass = password_hash("password", PASSWORD_DEFAULT, $options);
+              $pass = password_hash("test", PASSWORD_DEFAULT, $options);
               print($pass . "\n");
-              $succeed = password_verify("password", $pass);
+              $succeed = password_verify("test", $pass);
               if ($succeed == true) {
               print("Hooray, it matched!");
               } else {
               print("It failed...");
               }
-             */
+             
             ?>
         </form>
     </body>
